@@ -2,21 +2,30 @@ extends Node
 
 @export var mob_scene: PackedScene
 var score
+var milk_tea_level = 1.0  # 1.0 is full, 0.0 is empty
+
+
+func _ready():
+	$ScoreTimer.wait_time = 0.5  # Update every half second instead of every second
+
 
 func game_over():
-	$ScoreTimer.stop()
-	$MobTimer.stop()
-	$HUD.show_game_over()
-	$Music.stop()
-	$DeathSound.play()
+	pass
+	#$ScoreTimer.stop()
+	#$MobTimer.stop()
+	#$HUD.show_game_over()
+	#$Music.stop()
+	#$DeathSound.play()
 
 
 func new_game():
 	get_tree().call_group(&"mobs", &"queue_free")
 	score = 0
+	milk_tea_level = 1.0
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	$HUD.update_score(score)
+	$HUD.update_milk_tea_level(milk_tea_level)
 	$HUD.show_message("Get Ready")
 	$Music.play()
 
@@ -46,11 +55,21 @@ func _on_MobTimer_timeout():
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
 
+
 func _on_ScoreTimer_timeout():
 	score += 1
 	$HUD.update_score(score)
+	milk_tea_level -= 0.01  # Decrease by 1% each time 
+	milk_tea_level = max(milk_tea_level, 0)  # Ensure it doesn't go below 0
+	$HUD.update_milk_tea_level(milk_tea_level)
 
 
 func _on_StartTimer_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
+
+
+func _process(delta):
+	# TODO: implement game over in another PR
+	if milk_tea_level <= 0:
+		game_over()
