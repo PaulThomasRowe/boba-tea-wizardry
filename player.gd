@@ -2,27 +2,28 @@ extends Area2D
 
 signal hit
 
-@export var speed = 400 # How fast the player will move (pixels/sec).
+var player_speed = 400
+var rotation_speed = 7
 var screen_size # Size of the game window.
 
 func _ready():
 	screen_size = get_viewport_rect().size
 	hide()
 
-
 func _process(delta):
 	var velocity = Vector2.ZERO # The player's movement vector.
-	if Input.is_action_pressed(&"move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed(&"move_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed(&"move_down"):
-		velocity.y += 1
-	if Input.is_action_pressed(&"move_up"):
-		velocity.y -= 1
+	
+	# rotation of the player
+	var rotation_direction = Input.get_axis("move_left", "move_right")
+	rotation += rotation_direction * rotation_speed * delta
+	
+	# forward motion of the player
+	var player_direction = Input.get_axis("move_down", "move_up")
+	velocity = player_direction * player_speed * transform.y
 
+	# This is probably the code for the player animation
 	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
+		velocity = velocity.normalized() * player_speed
 		$AnimatedSprite2D.play()
 	else:
 		$AnimatedSprite2D.stop()
@@ -42,7 +43,6 @@ func _process(delta):
 
 func start(pos):
 	position = pos
-	rotation = 0
 	show()
 	$CollisionShape2D.disabled = false
 
