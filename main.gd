@@ -18,8 +18,17 @@ func new_game():
 	$StartTimer.start()
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
-	$Music.play()
+	fade_music_in()
 
+func fade_music_in() -> void:
+	const fade_time = 2.0
+	const default_music_db = -10.0
+
+	$Music.volume_db = -90.0 # Mute the player
+	$Music.play() # Start playing
+	# Use tweens for transition:
+	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	tween.tween_property($Music, "volume_db", default_music_db, fade_time)
 
 func _on_MobTimer_timeout():
 	# Create a new instance of the Mob scene.
