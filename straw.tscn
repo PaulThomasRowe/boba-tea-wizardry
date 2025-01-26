@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://68lr72avi5pa"]
+[gd_scene load_steps=5 format=3 uid="uid://dlalpulpupybb"]
 
 [ext_resource type="Script" path="res://straw.gd" id="1_an6mm"]
 [ext_resource type="Texture2D" uid="uid://bjgbfm2plykb4" path="res://art/boba-straw.png" id="2_4w2yw"]
@@ -19,7 +19,8 @@ radius = 23.0
 height = 66.0
 
 [node name="Straw" type="RigidBody2D" groups=["mobs"]]
-collision_mask = 0
+collision_layer = 2
+collision_mask = 2
 gravity_scale = 0.0
 script = ExtResource("1_an6mm")
 
