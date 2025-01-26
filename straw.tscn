@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://66mp5ewyefok"]
+
+[ext_resource type="Script" path="res://straw.gd" id="1_an6mm"]
+[ext_resource type="Texture2D" uid="uid://bgqvi07tsly4f" path="res://art/boba_straw_12oz.webp" id="2_k8h7b"]
+
+[sub_resource type="SpriteFrames" id="1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_k8h7b")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="2"]
+radius = 37.0
+height = 100.0
+
+[node name="Straw" type="RigidBody2D" groups=["mobs"]]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_an6mm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("1")
+animation = &"fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("2")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

@@ -1,6 +1,8 @@
 extends Node
 
 @export var mob_scene: PackedScene
+@export var straw_scene: PackedScene
+
 @export var min_spawn_interval: float = 3
 @export var max_spawn_interval: float = 7.0
 @export var spawn_margin: float = 50.0
@@ -40,6 +42,12 @@ func new_game():
 	
 	$HUD.update_score(score)
 	$HUD.update_milk_tea_level(milk_tea_level)
+	
+	straw_scene = preload("res://straw.tscn")
+	var straw_instance = straw_scene.instantiate()
+	straw_instance.position = Vector2(225, -300)
+	add_child(straw_instance)
+	
 	$HUD.show_message("Get Ready")
 	
 	fade_music_in()
