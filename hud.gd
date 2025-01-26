@@ -10,12 +10,8 @@ func show_message(text):
 	$MessageTimer.start()
 
 func show_game_over():
-	show_message("Game Over")
+	show_message("Game Over\nBoba Wizard")
 	await $MessageTimer.timeout
-	$MessageLabel.text = "Boba\nWizard"
-	$MessageLabel.show()
-	await get_tree().create_timer(1).timeout
-	$StartButton.show()
 
 func update_score(score):
 	$ScoreLabel.text = str(score)
