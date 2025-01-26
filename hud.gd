@@ -22,6 +22,9 @@ func update_milk_tea_level(percentage: float):
 	tween = create_tween()
 	tween.tween_property($MilkTeaLevel, "anchor_top", 1 - percentage, 0.5)  # 0.5 seconds duration
 
+func hide_message():
+	$MessageLabel.hide()
+
 func update_straw():
 	if tween:
 		tween.kill()  # Stop any ongoing tween
