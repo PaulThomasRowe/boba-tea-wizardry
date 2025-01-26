@@ -4,10 +4,8 @@ extends Node
 var score
 var milk_tea_level = 1.0  # 1.0 is full, 0.0 is empty
 
-
 func _ready():
 	$ScoreTimer.wait_time = 0.5  # Update every half second instead of every second
-
 
 func game_over():
 	pass
@@ -16,7 +14,6 @@ func game_over():
 	#$HUD.show_game_over()
 	#$Music.stop()
 	#$DeathSound.play()
-
 
 func new_game():
 	get_tree().call_group(&"mobs", &"queue_free")
@@ -28,7 +25,6 @@ func new_game():
 	$HUD.update_milk_tea_level(milk_tea_level)
 	$HUD.show_message("Get Ready")
 	$Music.play()
-
 
 func _on_MobTimer_timeout():
 	# Create a new instance of the Mob scene.
@@ -55,7 +51,6 @@ func _on_MobTimer_timeout():
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
 
-
 func _on_ScoreTimer_timeout():
 	score += 1
 	$HUD.update_score(score)
@@ -63,11 +58,9 @@ func _on_ScoreTimer_timeout():
 	milk_tea_level = max(milk_tea_level, 0)  # Ensure it doesn't go below 0
 	$HUD.update_milk_tea_level(milk_tea_level)
 
-
 func _on_StartTimer_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
-
 
 func _process(delta):
 	# TODO: implement game over in another PR
