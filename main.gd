@@ -4,12 +4,16 @@ extends Node
 @export var straw_scene: PackedScene
 @export var min_spawn_interval: float = 1.0  # Reduced from 3
 @export var max_spawn_interval: float = 4.0  # Reduced from 7.0
+@export var min_ice_spawn_interval: float = 3.0
+@export var max_ice_spawn_interval: float = 7.0
 @export var spawn_margin: float = 50.0
 var falling_boba_scene = preload("res://falling_boba.tscn")
+var falling_ice_bomb = preload("res://ice_bomb.tscn")
 var score
 var milk_tea_level = 1.0  # 1.0 is full, 0.0 is empty
 var milk_tea_left_boundary: float
 var milk_tea_right_boundary: float
+var game_started = false
 
 
 
@@ -21,6 +25,7 @@ func _ready():
 	update_milk_tea_boundaries()
 	
 func game_over():
+	game_started = false
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
@@ -30,12 +35,13 @@ func game_over():
 	# Hide player and clear all bobas
 	$Player.hide()
 	get_tree().call_group("falling_boba", "queue_free")
+	get_tree().call_group("falling_ice_bomb", "queue_free")
 	
 	# Show the Start Button after the delay
 	$HUD/StartButton.show()
 
 func new_game():
-	get_tree().call_group(&"mobs", &"queue_free")
+	game_started = false
 	score = 100
 	$HUD.update_score(score)
 	milk_tea_level = 1.0
@@ -60,6 +66,9 @@ func new_game():
 
 # Spawn timer for the boba
 func spawn_boba():
+	if not game_started:
+		return
+		
 	var spawn_count = randi_range(1, 2)  # Spawn 1 to 2 boba at a time
 	for i in range(spawn_count):
 		var new_boba = falling_boba_scene.instantiate()
@@ -77,6 +86,32 @@ func spawn_boba():
 	# Set timer for next spawn
 	var next_spawn_time = randf_range(min_spawn_interval, max_spawn_interval)
 	get_tree().create_timer(next_spawn_time).timeout.connect(spawn_boba)
+
+func spawn_ice_bomb():
+	if not game_started:
+		return
+		
+	var new_ice_bomb = falling_ice_bomb.instantiate()
+	new_ice_bomb.add_to_group("falling_ice_bomb")
+	
+	# Connect the exploded signal
+	new_ice_bomb.connect("exploded", Callable(self, "_on_ice_bomb_exploded"))
+	
+	# Set random x position within the milk tea boundaries
+	new_ice_bomb.position.x = randf_range(milk_tea_left_boundary, milk_tea_right_boundary)
+	new_ice_bomb.position.y = -50  # Start above the screen, staggered vertically
+	
+	# Set the boundaries
+	new_ice_bomb.set_boundaries(milk_tea_left_boundary, milk_tea_right_boundary)
+	
+	add_child(new_ice_bomb)
+	
+	# Set timer for next spawn
+	var next_spawn_time = randf_range(min_ice_spawn_interval, max_ice_spawn_interval)
+	get_tree().create_timer(next_spawn_time).timeout.connect(spawn_ice_bomb)
+
+func _on_ice_bomb_exploded(bomb_position):
+	$Player.push_from_explosion(bomb_position)
 
 func update_milk_tea_boundaries():
 	var viewport_size = get_viewport().size
@@ -112,9 +147,13 @@ func start_countdown():
 	await get_tree().create_timer(0.5).timeout
 	$HUD.hide_message()
 	
-	# Start the game timers
+	start_game()
+
+func start_game():
+	game_started = true
 	$StartTimer.start()
 	spawn_boba()
+	spawn_ice_bomb()
 
 func fade_music_in() -> void:
 	const fade_time = 2.0

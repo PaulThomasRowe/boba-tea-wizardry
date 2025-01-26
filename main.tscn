@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c6lnn2fvrbaw2"]
+[gd_scene load_steps=11 format=3 uid="uid://c6lnn2fvrbaw2"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_0r6n5"]
 [ext_resource type="PackedScene" uid="uid://c7khi36lobpce" path="res://mob.tscn" id="2_50pww"]
@@ -6,7 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bh8gl2v6ul1lv" path="res://hud.tscn" id="4_0qnje"]
 [ext_resource type="AudioStream" uid="uid://ds8qglpsg8cje" path="res://sfx/BGM.wav" id="5_c7a4f"]
 [ext_resource type="AudioStream" uid="uid://dw26fpygeag8o" path="res://art/gameover.wav" id="6_hp1r0"]
-[ext_resource type="PackedScene" uid="uid://b8l6bver4vk0" path="res://falling_boba.tscn" id="7_groxk"]
+[ext_resource type="PackedScene" uid="uid://d2gnq5vk7r6iv" path="res://falling_boba.tscn" id="7_groxk"]
+[ext_resource type="PackedScene" uid="uid://c6602l0dv2b3a" path="res://ice_bomb.tscn" id="8_dwa6l"]
 
 [sub_resource type="Curve2D" id="1"]
 _data = {
@@ -58,6 +59,9 @@ shape = SubResource("WorldBoundaryShape2D_f16fa")
 visible = false
 z_index = -1
 position = Vector2(-255, 564)
+
+[node name="IceBomb" parent="." instance=ExtResource("8_dwa6l")]
+visible = false
 
 [connection signal="start_game" from="HUD" to="." method="new_game"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
