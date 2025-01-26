@@ -24,7 +24,7 @@ func game_over():
 	
 	# Hide player and clear all mobs
 	$Player.hide()
-	get_tree().call_group("mobs", "queue_free")
+	get_tree().call_group("falling_boba", "queue_free")
 	
 	# Show the Start Button after the delay
 	$HUD/StartButton.show()
@@ -53,12 +53,12 @@ func new_game():
 	start_countdown()
 	fade_music_in()
 	
-	
-	# Spawn timer for the boba
+# Spawn timer for the boba
 func spawn_boba():
 	
 	var new_boba = falling_boba_scene.instantiate()
 	var viewport_size = get_viewport().size
+	new_boba.add_to_group("falling_boba")
 	
 	# Set random x position
 	new_boba.position.x = randf_range(spawn_margin, viewport_size.x - spawn_margin)
@@ -97,7 +97,7 @@ func fade_music_in() -> void:
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	tween.tween_property($Music, "volume_db", default_music_db, fade_time)
 
-#Commented out Original mobs
+# Commented out Original mobs
 """func _on_MobTimer_timeout():
 	# Create a new instance of the Mob scene.
 	var mob = mob_scene.instantiate()
