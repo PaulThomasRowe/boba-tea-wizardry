@@ -1,8 +1,16 @@
 extends Node
 
 @export var mob_scene: PackedScene
+@export var straw_scene: PackedScene
+
+@export var min_spawn_interval: float = 3
+@export var max_spawn_interval: float = 7.0
+@export var spawn_margin: float = 50.0
+var falling_boba_scene = preload("res://falling_boba.tscn")
 var score
 var milk_tea_level = 1.0  # 1.0 is full, 0.0 is empty
+
+
 
 func _ready():
 	$ScoreTimer.wait_time = 0.5  # Update every half second instead of every second
@@ -22,6 +30,7 @@ func game_over():
 	$HUD/StartButton.show()
 
 func new_game():
+	spawn_boba()
 	get_tree().call_group(&"mobs", &"queue_free")
 	score = 0
 	milk_tea_level = 1.0
@@ -33,10 +42,33 @@ func new_game():
 	
 	$HUD.update_score(score)
 	$HUD.update_milk_tea_level(milk_tea_level)
+	
+	straw_scene = preload("res://straw.tscn")
+	var straw_instance = straw_scene.instantiate()
+	straw_instance.position = Vector2(225, -300)
+	add_child(straw_instance)
+	
 	$HUD.show_message("Get Ready")
 	
 	start_countdown()
 	fade_music_in()
+	
+	
+	# Spawn timer for the boba
+func spawn_boba():
+	
+	var new_boba = falling_boba_scene.instantiate()
+	var viewport_size = get_viewport().size
+	
+	# Set random x position
+	new_boba.position.x = randf_range(spawn_margin, viewport_size.x - spawn_margin)
+	new_boba.position.y = -50  # Start above the screen
+	
+	add_child(new_boba)
+	
+	# Set timer for next spawn
+	var next_spawn_time = randf_range(min_spawn_interval, max_spawn_interval)
+	get_tree().create_timer(next_spawn_time).timeout.connect(spawn_boba)
 
 func start_countdown():
 	$HUD.show_message("Get Ready")
@@ -65,7 +97,8 @@ func fade_music_in() -> void:
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	tween.tween_property($Music, "volume_db", default_music_db, fade_time)
 
-func _on_MobTimer_timeout():
+#Commented out Original mobs
+"""func _on_MobTimer_timeout():
 	# Create a new instance of the Mob scene.
 	var mob = mob_scene.instantiate()
 
@@ -88,7 +121,7 @@ func _on_MobTimer_timeout():
 	mob.linear_velocity = velocity.rotated(direction)
 
 	# Spawn the mob by adding it to the Main scene.
-	add_child(mob)
+	add_child(mob)"""
 
 func _on_ScoreTimer_timeout():
 	score += 1
