@@ -18,7 +18,7 @@ var player_speed_boost = false
 var player_slow = false
 
 # collision modifiers
-var player_slowdown_speed_modifier = 0.2
+var player_slowdown_speed_modifier = 0.4
 var player_slowdown_rotation_modifier = 0.4
 
 var milk_tea_level: Control
@@ -51,7 +51,6 @@ func _process(delta):
 
 	# This is probably the code for the player animation
 	if velocity.length() > 0:
-		velocity = velocity.normalized() * player_base_speed
 		$AnimatedSprite2D.play()
 	else:
 		$AnimatedSprite2D.stop()
@@ -96,7 +95,7 @@ func calculate_speed(player_direction, delta):
 		player_speed_modifier *= player_speed_boost_modifier
 	if player_slow and not player_immune:
 		player_speed_modifier *= player_slowdown_speed_modifier
-	velocity = (player_direction * player_base_speed * transform.y) * player_speed_modifier
+	velocity = (player_direction * (player_base_speed * player_speed_modifier) * transform.y) 
 	return velocity
 
 func start(pos, mtl: ColorRect, left: float, right: float):
