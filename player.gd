@@ -72,6 +72,9 @@ func start(pos):
 func grant_immunity():
 	player_immune = true
 	print("Immunity granted for " + str(player_immunity_time) + " seconds!")
+	if player_base_movement_modifier >  player_movement_modifier:
+		print("Immunity granted so restoring player movement!")
+		player_movement_modifier = player_base_movement_modifier
 	await get_tree().create_timer(player_immunity_time).timeout
 	player_immune = false
 	print("Immunity finished!")
@@ -85,8 +88,8 @@ func grant_speed_boost():
 
 # This function determines what happens if the player collides with 
 func _on_body_entered(_body):
-	print("Player speed reduced because of collision!")
 	if not player_immune:
+		print("Player speed reduced because of collision!")
 		player_movement_modifier = player_slowdown_modifier * player_base_movement_modifier
 	"""
 	Old code that kills the player
@@ -98,5 +101,6 @@ func _on_body_entered(_body):
 	
 func _on_body_exited(_body):
 	# Reset player movement back to normal
-	player_movement_modifier = player_base_movement_modifier
-	print("Player speed restored because of exiting collision!")
+	if not player_immune:
+		player_movement_modifier = player_base_movement_modifier
+		print("Player speed restored because of exiting collision!")
