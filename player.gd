@@ -115,6 +115,7 @@ func grant_speed_boost():
 
 # This function determines what happens if the player collides with 
 func _on_body_entered(_body):
+	print(_body)
 	print("Player speed reduced because of collision!")
 	player_slow = true
 	"""

@@ -15,8 +15,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="2"]
-radius = 37.0
-height = 100.0
+radius = 23.0
+height = 66.0
 
 [node name="Straw" type="RigidBody2D" groups=["mobs"]]
 collision_mask = 0
@@ -29,7 +29,8 @@ sprite_frames = SubResource("1")
 animation = &"fly"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-rotation = 1.5708
+position = Vector2(0, 571)
+scale = Vector2(0.531633, 1)
 shape = SubResource("2")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
