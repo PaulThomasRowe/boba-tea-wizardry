@@ -1,0 +1,96 @@
+[gd_scene load_steps=16 format=3 uid="uid://c4ubeglymqyfk"]
+
+[ext_resource type="Script" path="res://IntroCutscene/IntroSceneAdvancement.gd" id="1_x5pke"]
+[ext_resource type="Texture2D" uid="uid://vtqhcfrfqldk" path="res://IntroCutscene/Cut scene 1.png" id="1_xlq3u"]
+[ext_resource type="Texture2D" uid="uid://cbwlqqis6hfao" path="res://IntroCutscene/Title_bounce.png" id="2_omyhf"]
+[ext_resource type="Texture2D" uid="uid://0kn3jimfhvem" path="res://IntroCutscene/Cut scene 2.png" id="3_elfdb"]
+[ext_resource type="Texture2D" uid="uid://owa5ljjoknjn" path="res://IntroCutscene/Menu Screen.png" id="3_xgt7h"]
+[ext_resource type="Script" path="res://IntroCutscene/Start_Bounce.gd" id="4_32fn6"]
+[ext_resource type="Texture2D" uid="uid://ccygtfykbkgp6" path="res://IntroCutscene/Start.png" id="4_g56a2"]
+[ext_resource type="Texture2D" uid="uid://bcfhu1k267avk" path="res://IntroCutscene/Cut scene 3.png" id="4_tuetg"]
+[ext_resource type="Texture2D" uid="uid://qs6xn04nhycl" path="res://IntroCutscene/Cut scene 4.png" id="5_mj17a"]
+[ext_resource type="Texture2D" uid="uid://b6idlmckil15d" path="res://IntroCutscene/Cut scene 5.png" id="6_jp8it"]
+[ext_resource type="Texture2D" uid="uid://bygdn0a04uy55" path="res://IntroCutscene/Cut scene 6.png" id="7_qntvi"]
+[ext_resource type="Texture2D" uid="uid://bwxx6iyh25w2g" path="res://IntroCutscene/Cut scene 7.png" id="8_i6df8"]
+[ext_resource type="Texture2D" uid="uid://d8vylyhubk7i" path="res://IntroCutscene/Cut scene 8.png" id="9_ib2e2"]
+[ext_resource type="Texture2D" uid="uid://bv68pjkg0kihf" path="res://IntroCutscene/Cut scene 9.png" id="10_0rfeq"]
+[ext_resource type="Texture2D" uid="uid://ddis3w7ne2ouy" path="res://IntroCutscene/Cut scene 10.png" id="15_faolm"]
+
+[node name="IntroScene1" type="Node2D"]
+script = ExtResource("1_x5pke")
+
+[node name="MainMenu" type="Sprite2D" parent="."]
+position = Vector2(242.5, 363.875)
+scale = Vector2(0.337, 0.434)
+texture = ExtResource("3_xgt7h")
+
+[node name="Start" type="Sprite2D" parent="MainMenu"]
+position = Vector2(-27.0771, 440.092)
+scale = Vector2(1.01555, 0.889257)
+texture = ExtResource("4_g56a2")
+script = ExtResource("4_32fn6")
+
+[node name="TitleBounce" type="Sprite2D" parent="MainMenu"]
+position = Vector2(-19.2879, 281.394)
+scale = Vector2(0.65275, 0.717395)
+texture = ExtResource("2_omyhf")
+
+[node name="CutScene1" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(242.5, 363.875)
+scale = Vector2(0.337, 0.434)
+texture = ExtResource("1_xlq3u")
+
+[node name="CutScene2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(242.5, 363.875)
+scale = Vector2(0.337, 0.434)
+texture = ExtResource("3_elfdb")
+
+[node name="CutScene3" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(242.5, 363.875)
+scale = Vector2(0.337, 0.434)
+texture = ExtResource("4_tuetg")
+
+[node name="CutScene4" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(242.5, 363.875)
+scale = Vector2(0.337, 0.434)
+texture = ExtResource("5_mj17a")
+
+[node name="CutScene5" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(242.5, 363.875)
+scale = Vector2(0.337, 0.434)
+texture = ExtResource("6_jp8it")
+
+[node name="CutScene6" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(242.5, 363.875)
+scale = Vector2(0.337, 0.434)
+texture = ExtResource("7_qntvi")
+
+[node name="CutScene7" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(242.5, 363.875)
+scale = Vector2(0.337, 0.434)
+texture = ExtResource("8_i6df8")
+
+[node name="CutScene8" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(242.5, 363.875)
+scale = Vector2(0.337, 0.434)
+texture = ExtResource("9_ib2e2")
+
+[node name="CutScene9" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(242.5, 363.875)
+scale = Vector2(0.336806, 0.433838)
+texture = ExtResource("10_0rfeq")
+
+[node name="CutScene10" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(242.5, 363.875)
+scale = Vector2(0.336806, 0.433838)
+texture = ExtResource("15_faolm")

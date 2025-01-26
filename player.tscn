@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://4vwrqjegqwpj"]
+[gd_scene load_steps=15 format=3 uid="uid://b4wpmqp05t6cu"]
 
 [ext_resource type="Script" path="res://player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bac0fah1mlarl" path="res://art/FishyWizard_move_1.png" id="2_oxw8l"]
 [ext_resource type="Texture2D" uid="uid://d4l47jgr5fofb" path="res://art/FishyWizard_move_2.png" id="3_2dqo8"]
+[ext_resource type="Texture2D" uid="uid://ciumvho52mrr" path="res://art/FishyWizard_left_move_3.png" id="4_i23dn"]
 [ext_resource type="Texture2D" uid="uid://ba15v24abmcmk" path="res://art/Stars_2.png" id="5_lbigg"]
 [ext_resource type="Texture2D" uid="uid://c2hslc4hgtw0h" path="res://art/Stars_3.png" id="6_wlgvi"]
 
@@ -10,14 +11,20 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("3_2dqo8")
+}, {
+"duration": 1.0,
 "texture": ExtResource("2_oxw8l")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_2dqo8")
+"texture": ExtResource("4_i23dn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_oxw8l")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 20.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="2"]

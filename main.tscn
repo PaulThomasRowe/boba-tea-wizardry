@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ccqoreueuxdb7" path="res://hud.tscn" id="4_0qnje"]
 [ext_resource type="AudioStream" uid="uid://b5ig8lm3ddisj" path="res://sfx/BGM.wav" id="5_c7a4f"]
 [ext_resource type="AudioStream" uid="uid://dw26fpygeag8o" path="res://art/gameover.wav" id="6_hp1r0"]
-[ext_resource type="PackedScene" path="res://falling_boba.tscn" id="7_groxk"]
+[ext_resource type="PackedScene" uid="uid://d2gnq5vk7r6iv" path="res://falling_boba.tscn" id="7_groxk"]
 
 [sub_resource type="Curve2D" id="1"]
 _data = {
@@ -55,7 +55,9 @@ scale = Vector2(3.06, 3.06)
 shape = SubResource("WorldBoundaryShape2D_f16fa")
 
 [node name="fallingBoba" parent="." instance=ExtResource("7_groxk")]
-position = Vector2(-172, -55)
+visible = false
+z_index = -1
+position = Vector2(-255, 564)
 
 [connection signal="start_game" from="HUD" to="." method="new_game"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]

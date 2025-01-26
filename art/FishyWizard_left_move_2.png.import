@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ftkxr8r4qghp"
-path="res://.godot/imported/playerGrey_walk1.png-c4773fe7a7bf85d7ab732eb4458c2742.ctex"
+uid="uid://d4l47jgr5fofb"
+path="res://.godot/imported/FishyWizard_left_move_2.png-fa0cf0de0c992322b2a814b87ac971ba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/playerGrey_walk1.png"
-dest_files=["res://.godot/imported/playerGrey_walk1.png-c4773fe7a7bf85d7ab732eb4458c2742.ctex"]
+source_file="res://art/FishyWizard_left_move_2.png"
+dest_files=["res://.godot/imported/FishyWizard_left_move_2.png-fa0cf0de0c992322b2a814b87ac971ba.ctex"]
 
 [params]
 
