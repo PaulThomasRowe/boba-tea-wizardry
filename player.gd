@@ -2,20 +2,25 @@ extends Area2D
 
 signal hit
 
-# player movement variables
+# player const movement variables
 const player_base_speed = 400
+const player_base_rotation_speed = 7
 const player_base_movement_modifier = 1
-var player_movement_modifier = player_base_movement_modifier
-var player_rotation_speed = 7
+# player const movement variable for status effects
+const player_speed_boost_modifier = 2
 
-# player boosts variables
-var player_immune = false
+# player boosts times
 var player_immunity_time = 2
-var player_speed_boost_modifier = 2
 var player_speed_time = 2
 
+# player status effects
+var player_immune = false
+var player_speed_boost = false
+var player_slow = false
+
 # collision modifiers
-var player_slowdown_modifier = 0.4
+var player_slowdown_speed_modifier = 0.2
+var player_slowdown_rotation_modifier = 0.4
 
 # TODO: Why is this here????
 var screen_size # Size of the game window.
@@ -25,15 +30,13 @@ func _ready():
 	hide()
 
 func _process(delta):
-	var velocity = Vector2.ZERO # The player's movement vector.
-	
 	# rotation of the player
 	var rotation_direction = Input.get_axis("move_left", "move_right")
-	rotation += rotation_direction * player_rotation_speed * delta * player_movement_modifier
+	rotation = calculate_rotation(rotation_direction, delta)
 	
 	# forward motion of the player
 	var player_direction = Input.get_axis("move_down", "move_up")
-	velocity = player_direction * player_base_speed * transform.y * player_movement_modifier
+	var velocity = calculate_speed(player_direction, delta)
 
 	# test power up
 	if Input.is_action_just_pressed("test_immunity"):
@@ -63,6 +66,24 @@ func _process(delta):
 		$AnimatedSprite2D.animation = &"up"
 		rotation = PI if velocity.y > 0 else 0
 
+func calculate_rotation(rotation_direction, delta):
+	var player_rotation_modifier = player_base_movement_modifier
+	if player_speed_boost:
+		player_rotation_modifier *= player_speed_boost_modifier
+	if player_slow and not player_immune:
+		player_rotation_modifier *= player_slowdown_rotation_modifier
+	rotation += (rotation_direction * player_base_rotation_speed * delta) * player_rotation_modifier
+	return rotation
+
+func calculate_speed(player_direction, delta):
+	var velocity = Vector2.ZERO # The player's movement vector.
+	var player_speed_modifier = player_base_movement_modifier
+	if player_speed_boost:
+		player_speed_modifier *= player_speed_boost_modifier
+	if player_slow and not player_immune:
+		player_speed_modifier *= player_slowdown_speed_modifier
+	velocity = (player_direction * player_base_speed * transform.y) * player_speed_modifier
+	return velocity
 
 func start(pos):
 	position = pos
@@ -72,25 +93,21 @@ func start(pos):
 func grant_immunity():
 	player_immune = true
 	print("Immunity granted for " + str(player_immunity_time) + " seconds!")
-	if player_base_movement_modifier >  player_movement_modifier:
-		print("Immunity granted so restoring player movement!")
-		player_movement_modifier = player_base_movement_modifier
 	await get_tree().create_timer(player_immunity_time).timeout
 	player_immune = false
 	print("Immunity finished!")
 	
 func grant_speed_boost():
-	player_movement_modifier = player_speed_boost_modifier * player_base_movement_modifier
+	player_speed_boost = true
 	print("speed boost granted for " + str(player_speed_time) + " seconds!")
 	await get_tree().create_timer(player_speed_time).timeout
-	player_movement_modifier = player_base_movement_modifier
+	player_speed_boost = false
 	print("speed boost finished!")
 
 # This function determines what happens if the player collides with 
 func _on_body_entered(_body):
-	if not player_immune:
-		print("Player speed reduced because of collision!")
-		player_movement_modifier = player_slowdown_modifier * player_base_movement_modifier
+	print("Player speed reduced because of collision!")
+	player_slow = true
 	"""
 	Old code that kills the player
 	hide() # Player disappears after being hit.
@@ -101,6 +118,5 @@ func _on_body_entered(_body):
 	
 func _on_body_exited(_body):
 	# Reset player movement back to normal
-	if not player_immune:
-		player_movement_modifier = player_base_movement_modifier
-		print("Player speed restored because of exiting collision!")
+	player_slow = false
+	print("Player speed restored because of exiting collision!")
