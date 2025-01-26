@@ -66,6 +66,7 @@ func _process(delta):
 		$AnimatedSprite2D.animation = &"up"
 		rotation = PI if velocity.y > 0 else 0
 
+
 func calculate_rotation(rotation_direction, delta):
 	var player_rotation_modifier = player_base_movement_modifier
 	if player_speed_boost:
@@ -89,6 +90,7 @@ func start(pos):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
+
 
 func grant_immunity():
 	player_immune = true

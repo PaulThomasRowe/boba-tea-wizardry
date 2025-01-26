@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://cyfwty2q3rdse"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_0r6n5"]
-[ext_resource type="PackedScene" uid="uid://rkdnhqgf2hpj" path="res://mob.tscn" id="2_50pww"]
-[ext_resource type="PackedScene" uid="uid://4vwrqjegqwpj" path="res://player.tscn" id="3_veqnc"]
-[ext_resource type="PackedScene" uid="uid://ccqoreueuxdb7" path="res://hud.tscn" id="4_0qnje"]
-[ext_resource type="AudioStream" uid="uid://bp13se6u45mx6" path="res://sfx/BGM.wav" id="5_c7a4f"]
+[ext_resource type="PackedScene" uid="uid://soyxpu1fwey6" path="res://mob.tscn" id="2_50pww"]
+[ext_resource type="PackedScene" uid="uid://b4wpmqp05t6cu" path="res://player.tscn" id="3_veqnc"]
+[ext_resource type="PackedScene" uid="uid://bh8gl2v6ul1lv" path="res://hud.tscn" id="4_0qnje"]
+[ext_resource type="AudioStream" uid="uid://dccxbwhqa6tgf" path="res://sfx/BGM.wav" id="5_c7a4f"]
 [ext_resource type="AudioStream" uid="uid://dw26fpygeag8o" path="res://art/gameover.wav" id="6_hp1r0"]
 
 [sub_resource type="Curve2D" id="1"]
@@ -45,7 +45,6 @@ stream = ExtResource("5_c7a4f")
 stream = ExtResource("6_hp1r0")
 
 [connection signal="start_game" from="HUD" to="." method="new_game"]
-[connection signal="hit" from="Player" to="." method="game_over"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
