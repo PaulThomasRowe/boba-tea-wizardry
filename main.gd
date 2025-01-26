@@ -8,22 +8,33 @@ func _ready():
 	$ScoreTimer.wait_time = 0.5  # Update every half second instead of every second
 
 func game_over():
-	pass
-	#$ScoreTimer.stop()
-	#$MobTimer.stop()
-	#$HUD.show_game_over()
-	#$Music.stop()
+	$ScoreTimer.stop()
+	$MobTimer.stop()
+	$HUD.show_game_over()
+	$Music.stop()
 	#$DeathSound.play()
+	
+	# Hide player and clear all mobs
+	$Player.hide()
+	get_tree().call_group("mobs", "queue_free")
+	
+	# Show the Start Button after the delay
+	$HUD/StartButton.show()
 
 func new_game():
 	get_tree().call_group(&"mobs", &"queue_free")
 	score = 0
 	milk_tea_level = 1.0
+	
+	# Place the player in the start position
 	$Player.start($StartPosition.position)
+	$Player.show()
 	$StartTimer.start()
+	
 	$HUD.update_score(score)
 	$HUD.update_milk_tea_level(milk_tea_level)
 	$HUD.show_message("Get Ready")
+	
 	fade_music_in()
 
 func fade_music_in() -> void:
@@ -32,6 +43,7 @@ func fade_music_in() -> void:
 
 	$Music.volume_db = -90.0 # Mute the player
 	$Music.play() # Start playing
+	
 	# Use tweens for transition:
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	tween.tween_property($Music, "volume_db", default_music_db, fade_time)
@@ -67,12 +79,13 @@ func _on_ScoreTimer_timeout():
 	milk_tea_level -= 0.01  # Decrease by 1% each time 
 	milk_tea_level = max(milk_tea_level, 0)  # Ensure it doesn't go below 0
 	$HUD.update_milk_tea_level(milk_tea_level)
+	if milk_tea_level <= 0:
+		game_over()
 
 func _on_StartTimer_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
 
 func _process(delta):
-	# TODO: implement game over in another PR
 	if milk_tea_level <= 0:
 		game_over()

@@ -1,7 +1,5 @@
 extends Area2D
 
-signal hit
-
 var player_speed = 400
 var rotation_speed = 7
 var screen_size # Size of the game window.
@@ -40,15 +38,7 @@ func _process(delta):
 		$AnimatedSprite2D.animation = &"up"
 		rotation = PI if velocity.y > 0 else 0
 
-
 func start(pos):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
-
-
-func _on_body_entered(_body):
-	hide() # Player disappears after being hit.
-	hit.emit()
-	# Must be deferred as we can't change physics properties on a physics callback.
-	$CollisionShape2D.set_deferred(&"disabled", true)
