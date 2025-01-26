@@ -37,6 +37,7 @@ func new_game():
 	var scene_instance = my_scene.instantiate()
 	scene_instance.position = Vector2(225, 150)
 	add_child(scene_instance)
+	#scene_instance._start_swing()
 	
 	$HUD.show_message("Get Ready")
 	#$Straw.show()

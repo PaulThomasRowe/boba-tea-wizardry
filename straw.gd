@@ -11,16 +11,17 @@ func _ready():
 
 func _process(delta):
 	position.y += downward_speed * delta
+	rotation_degrees += 45 * delta
 
-func _start_swing():
-	#var tween = $Tween
+#func _start_swing():
+	#var tween = create_tween()
 	#tween.interpolate_property(
 		#self, "rotation_degrees", 
 		#-swing_amplitude, swing_amplitude, 
 		#swing_speed, Tween.TRANS_SINE, Tween.EASE_IN_OUT, -1
 	#)
 	#tween.start()
-	return
+	#return
 	
 func start(pos):
 	position = pos
@@ -29,4 +30,4 @@ func start(pos):
 	$AnimatedSprite2D.play()
 	var mob_types = Array($AnimatedSprite2D.sprite_frames.get_animation_names())
 	$AnimatedSprite2D.animation = mob_types.pick_random()
-	_start_swing()
+	#_start_swing()
