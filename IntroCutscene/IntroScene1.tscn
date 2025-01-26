@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c4ubeglymqyfk"]
+[gd_scene load_steps=19 format=3 uid="uid://c4ubeglymqyfk"]
 
 [ext_resource type="Script" path="res://IntroCutscene/IntroSceneAdvancement.gd" id="1_x5pke"]
 [ext_resource type="Texture2D" uid="uid://vtqhcfrfqldk" path="res://IntroCutscene/Cut scene 1.png" id="1_xlq3u"]
@@ -11,26 +11,32 @@
 [ext_resource type="Texture2D" uid="uid://qs6xn04nhycl" path="res://IntroCutscene/Cut scene 4.png" id="5_mj17a"]
 [ext_resource type="Texture2D" uid="uid://b6idlmckil15d" path="res://IntroCutscene/Cut scene 5.png" id="6_jp8it"]
 [ext_resource type="Texture2D" uid="uid://bygdn0a04uy55" path="res://IntroCutscene/Cut scene 6.png" id="7_qntvi"]
-[ext_resource type="Texture2D" uid="uid://bwxx6iyh25w2g" path="res://IntroCutscene/Cut scene 7.png" id="8_i6df8"]
+[ext_resource type="Texture2D" uid="uid://cu4gmmixkttnj" path="res://IntroCutscene/Cut scene 7.png" id="8_i6df8"]
 [ext_resource type="Texture2D" uid="uid://d8vylyhubk7i" path="res://IntroCutscene/Cut scene 8.png" id="9_ib2e2"]
 [ext_resource type="Texture2D" uid="uid://bv68pjkg0kihf" path="res://IntroCutscene/Cut scene 9.png" id="10_0rfeq"]
+[ext_resource type="Script" path="res://IntroCutscene/Boom_Cutscene.gd" id="13_os1bl"]
+[ext_resource type="Texture2D" uid="uid://fedjarxxfhhj" path="res://IntroCutscene/ExplosionCutscene/Wizard_boom.png" id="14_jjf3m"]
 [ext_resource type="Texture2D" uid="uid://ddis3w7ne2ouy" path="res://IntroCutscene/Cut scene 10.png" id="15_faolm"]
+[ext_resource type="Texture2D" uid="uid://mbdp3q18g862" path="res://IntroCutscene/ExplosionCutscene/Fish_boom.png" id="15_qi3fm"]
 
 [node name="IntroScene1" type="Node2D"]
 script = ExtResource("1_x5pke")
 
 [node name="MainMenu" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(242.5, 363.875)
 scale = Vector2(0.337, 0.434)
 texture = ExtResource("3_xgt7h")
 
 [node name="Start" type="Sprite2D" parent="MainMenu"]
+visible = false
 position = Vector2(-27.0771, 440.092)
 scale = Vector2(1.01555, 0.889257)
 texture = ExtResource("4_g56a2")
 script = ExtResource("4_32fn6")
 
 [node name="TitleBounce" type="Sprite2D" parent="MainMenu"]
+visible = false
 position = Vector2(-19.2879, 281.394)
 scale = Vector2(0.65275, 0.717395)
 texture = ExtResource("2_omyhf")
@@ -72,10 +78,37 @@ scale = Vector2(0.337, 0.434)
 texture = ExtResource("7_qntvi")
 
 [node name="CutScene7" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(242.5, 363.875)
 scale = Vector2(0.337, 0.434)
 texture = ExtResource("8_i6df8")
+script = ExtResource("13_os1bl")
+
+[node name="Wizard_Boom" type="Sprite2D" parent="CutScene7"]
+position = Vector2(158.754, -22.7535)
+texture = ExtResource("14_jjf3m")
+
+[node name="Boom_1" type="Sprite2D" parent="CutScene7"]
+position = Vector2(158.754, -22.753)
+
+[node name="Boom_2" type="Sprite2D" parent="CutScene7"]
+position = Vector2(158.754, -22.753)
+
+[node name="Boom_3" type="Sprite2D" parent="CutScene7"]
+position = Vector2(158.754, -22.753)
+
+[node name="Boom_4" type="Sprite2D" parent="CutScene7"]
+position = Vector2(158.754, -22.753)
+
+[node name="Boom_5" type="Sprite2D" parent="CutScene7"]
+position = Vector2(158.754, -22.753)
+
+[node name="Boom_6" type="Sprite2D" parent="CutScene7"]
+position = Vector2(158.754, -22.753)
+
+[node name="Fish_Boom" type="Sprite2D" parent="CutScene7"]
+position = Vector2(158.754, -22.753)
+scale = Vector2(1, 1)
+texture = ExtResource("15_qi3fm")
 
 [node name="CutScene8" type="Sprite2D" parent="."]
 visible = false
