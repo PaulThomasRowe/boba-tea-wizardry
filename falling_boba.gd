@@ -11,10 +11,12 @@ func _ready():
 	
 	var player_texture = get_node("Sprite2D")
 	
-	var ice = preload("res://art/ice.png")
+	var aloe_vera = preload("res://art/aloe_vera.png")
+	var coffee_bean = preload("res://art/coffee_bean.png")
 	var boba = preload("res://art/regular-boba.png")
-	var images = [ice, boba]
+	var images = [boba, boba, boba, boba, aloe_vera, boba, coffee_bean, boba]
 	var name = images[randi() % images.size()]
+	#name = image[0]
 	$Sprite2D.texture = name
 	
 	#$Sprite2D.texture = 
