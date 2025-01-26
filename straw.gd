@@ -16,21 +16,18 @@ func _process(delta):
 	#print(position.y)
 	
 	if (position.y < -10):
-		position.y += downward_speed * delta * 0.25
+		position.y += downward_speed * delta * 0.3
 	elif (position.y < -200):
 		position.y += downward_speed * delta * 0.5
 	elif (position.y < -400):
-		position.y += downward_speed * delta * 0.8
+		position.y += downward_speed * delta * 0.7
 	elif (position.y < -500):
 		position.y += downward_speed * delta * 0.9
 	elif (position.y < -600):
-		position.y += downward_speed * delta * 1.0
+		position.y += downward_speed * delta * 1.2
 	
-	print(abs(fmod(rotation_degrees, 360)))
 	if (abs(fmod(rotation_degrees, 360)) > max_rotation):
 		clockwise = !clockwise
-	#elif !clockwise && abs(fmod(rotation_degrees, 360)) > max_rotation:
-	#	clockwise = true
 	
 	if clockwise:
 		rotation_degrees -= 45 * delta * swing_speed

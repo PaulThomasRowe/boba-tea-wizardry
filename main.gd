@@ -52,6 +52,7 @@ func new_game():
 	var straw_instance = straw_scene.instantiate()
 	straw_instance.position = Vector2(225, -550)
 	add_child(straw_instance)
+	straw_instance.add_to_group("straw")
 	
 	$HUD.show_message("Get Ready")
 	

@@ -1,5 +1,7 @@
 extends Area2D
 
+signal hit
+
 # player const movement variables
 const player_base_speed = 400
 const player_base_rotation_speed = 7
@@ -128,17 +130,18 @@ func grant_speed_boost():
 # This function determines what happens if the player collides with 
 func _on_body_entered(_body):
 	print(_body)
-	print("Player speed reduced because of collision!")
-	player_slow = true
-	"""
-	Old code that kills the player
-	hide() # Player disappears after being hit.
-	hit.emit()
-	# Must be deferred as we can't change physics properties on a physics callback.
-	$CollisionShape2D.set_deferred(&"disabled", true)
-	"""
-	
+		# Reset player movement back to normal
+	if _body.is_in_group("falling_boba"):
+		print("Player speed reduced because of collision!")
+		player_slow = true
+	if _body.is_in_group("straw"):
+		hide() # Player disappears after being hit.
+		hit.emit()
+		# Must be deferred as we can't change physics properties on a physics callback.
+		$CollisionShape2D.set_deferred(&"disabled", true)
+
 func _on_body_exited(_body):
 	# Reset player movement back to normal
-	player_slow = false
-	print("Player speed restored because of exiting collision!")
+	if _body.is_in_group("falling_boba"):
+		player_slow = false
+		print("Player speed restored because of exiting collision!")

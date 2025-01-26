@@ -30,9 +30,11 @@ sprite_frames = SubResource("1")
 animation = &"fly"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 12
 position = Vector2(0, 571)
 scale = Vector2(0.531633, 1)
 shape = SubResource("2")
+debug_color = Color(0.132586, 0.638005, 0.307606, 0.42)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
