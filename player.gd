@@ -4,6 +4,7 @@ extends Area2D
 const player_base_speed = 400
 const player_base_rotation_speed = 7
 const player_base_movement_modifier = 1
+
 # player const movement variable for status effects
 const player_speed_boost_modifier = 2
 
@@ -20,11 +21,9 @@ var player_slow = false
 var player_slowdown_speed_modifier = 0.2
 var player_slowdown_rotation_modifier = 0.4
 
-# TODO: Why is this here????
-var screen_size # Size of the game window.
+var milk_tea_level: Control
 
 func _ready():
-	screen_size = get_viewport_rect().size
 	hide()
 
 func _process(delta):
@@ -53,8 +52,13 @@ func _process(delta):
 		$AnimatedSprite2D.stop()
 
 	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size)
-
+	
+	# Clamp the player's position within the MilkTeaLevel boundaries
+	if milk_tea_level:
+		var mtl_rect = milk_tea_level.get_global_rect()
+		position.x = clamp(position.x, mtl_rect.position.x, mtl_rect.end.x)
+		position.y = clamp(position.y, mtl_rect.position.y, mtl_rect.end.y)
+	
 	if velocity.x != 0:
 		$AnimatedSprite2D.animation = &"right"
 		$AnimatedSprite2D.flip_v = false
@@ -63,7 +67,6 @@ func _process(delta):
 	elif velocity.y != 0:
 		$AnimatedSprite2D.animation = &"up"
 		rotation = PI if velocity.y > 0 else 0
-
 
 func calculate_rotation(rotation_direction, delta):
 	var player_rotation_modifier = player_base_movement_modifier
@@ -84,11 +87,11 @@ func calculate_speed(player_direction, delta):
 	velocity = (player_direction * player_base_speed * transform.y) * player_speed_modifier
 	return velocity
 
-func start(pos):
+func start(pos, mtl: Control):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
-
+	milk_tea_level = mtl
 
 func grant_immunity():
 	player_immune = true

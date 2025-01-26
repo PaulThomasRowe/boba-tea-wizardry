@@ -27,7 +27,7 @@ func new_game():
 	milk_tea_level = 1.0
 	
 	# Place the player in the start position
-	$Player.start($StartPosition.position)
+	$Player.start($StartPosition.position, $HUD/MilkTeaLevel)
 	$Player.show()
 	$StartTimer.start()
 	
