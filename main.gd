@@ -2,8 +2,8 @@ extends Node
 
 @export var mob_scene: PackedScene
 @export var straw_scene: PackedScene
-@export var min_spawn_interval: float = 3
-@export var max_spawn_interval: float = 7.0
+@export var min_spawn_interval: float = 0.5  # Reduced from 3
+@export var max_spawn_interval: float = 2.0  # Reduced from 7.0
 @export var spawn_margin: float = 50.0
 var falling_boba_scene = preload("res://falling_boba.tscn")
 var score
@@ -58,16 +58,19 @@ func new_game():
 
 # Spawn timer for the boba
 func spawn_boba():
-	var new_boba = falling_boba_scene.instantiate()
-	new_boba.add_to_group("falling_boba")
-	
-	# Set random x position within the milk tea boundaries
-	new_boba.position.x = randf_range(milk_tea_left_boundary, milk_tea_right_boundary)
-	new_boba.position.y = -50  # Start above the screen
-	
-	# Set the boundaries
-	new_boba.set_boundaries(milk_tea_left_boundary, milk_tea_right_boundary)
-	add_child(new_boba)
+	var spawn_count = randi_range(1, 2)  # Spawn 1 to 2 boba at a time
+	for i in range(spawn_count):
+		var new_boba = falling_boba_scene.instantiate()
+		new_boba.add_to_group("falling_boba")
+		
+		# Set random x position within the milk tea boundaries
+		new_boba.position.x = randf_range(milk_tea_left_boundary, milk_tea_right_boundary)
+		new_boba.position.y = -50 - (i * 20)  # Start above the screen, staggered vertically
+		
+		# Set the boundaries
+		new_boba.set_boundaries(milk_tea_left_boundary, milk_tea_right_boundary)
+		
+		add_child(new_boba)
 	
 	# Set timer for next spawn
 	var next_spawn_time = randf_range(min_spawn_interval, max_spawn_interval)
