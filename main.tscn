@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cyfwty2q3rdse"]
+[gd_scene load_steps=8 format=3 uid="uid://c6lnn2fvrbaw2"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_0r6n5"]
 [ext_resource type="PackedScene" uid="uid://rkdnhqgf2hpj" path="res://mob.tscn" id="2_50pww"]
@@ -17,13 +17,7 @@ point_count = 5
 script = ExtResource("1_0r6n5")
 mob_scene = ExtResource("2_50pww")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.219608, 0.372549, 0.380392, 1)
+[node name="HUD" parent="." instance=ExtResource("4_0qnje")]
 
 [node name="Player" parent="." instance=ExtResource("3_veqnc")]
 
@@ -44,16 +38,14 @@ curve = SubResource("1")
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
 
-[node name="HUD" parent="." instance=ExtResource("4_0qnje")]
-
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_c7a4f")
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_hp1r0")
 
+[connection signal="start_game" from="HUD" to="." method="new_game"]
 [connection signal="hit" from="Player" to="." method="game_over"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
-[connection signal="start_game" from="HUD" to="." method="new_game"]

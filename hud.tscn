@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccqoreueuxdb7"]
+[gd_scene load_steps=5 format=3 uid="uid://bh8gl2v6ul1lv"]
 
 [ext_resource type="Script" path="res://hud.gd" id="1"]
 [ext_resource type="FontFile" uid="uid://cit6gwe5px1q8" path="res://fonts/Xolonium-Regular.ttf" id="2_2jm3i"]
@@ -10,13 +10,32 @@ action = &"start_game"
 events = [SubResource("InputEventAction_fopy7")]
 
 [node name="HUD" type="CanvasLayer"]
+layer = -1
 script = ExtResource("1")
+
+[node name="WhiteBackground" type="ColorRect" parent="."]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.00225727
+
+[node name="MilkTeaLevel" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.800027, 0.61956, 1)
 
 [node name="ScoreLabel" type="Label" parent="."]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 78.0
 grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_2jm3i")
 theme_override_font_sizes/font_size = 60
 text = "0"
@@ -31,10 +50,11 @@ offset_top = -79.5
 offset_bottom = 79.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_2jm3i")
 theme_override_font_sizes/font_size = 60
-text = "Dodge the
-Creeps"
+text = "Boba
+Wizard"
 horizontal_alignment = 1
 
 [node name="StartButton" type="Button" parent="."]
