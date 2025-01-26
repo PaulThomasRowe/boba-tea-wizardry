@@ -22,6 +22,10 @@ var player_slowdown_speed_modifier = 0.4
 var player_slowdown_rotation_modifier = 0.4
 
 var milk_tea_level: Control
+var left_boundary: float
+var right_boundary: float
+var top_boundary: float
+var bottom_boundary: float
 
 func _ready():
 	$Trail.show_behind_parent
@@ -50,14 +54,16 @@ func _process(delta):
 		$AnimatedSprite2D.play()
 	else:
 		$AnimatedSprite2D.stop()
-
-	position += velocity * delta
 	
-	# Clamp the player's position within the MilkTeaLevel boundaries
-	if milk_tea_level:
-		var mtl_rect = milk_tea_level.get_global_rect()
-		position.x = clamp(position.x, mtl_rect.position.x, mtl_rect.end.x)
-		position.y = clamp(position.y, mtl_rect.position.y, mtl_rect.end.y)
+	# Calculate new position
+	var new_position = position + velocity * delta
+
+	# Clamp the player's position within the boundaries
+	new_position.x = clamp(new_position.x, left_boundary, right_boundary)
+	new_position.y = clamp(new_position.y, top_boundary, bottom_boundary)
+
+	# Update position
+	position = new_position
 	
 	if velocity.x != 0:
 		$AnimatedSprite2D.animation = &"default"
@@ -71,7 +77,6 @@ func _process(delta):
 		$Trail.visible = true
 	else:
 		$Trail.visible = false
-
 
 func calculate_rotation(rotation_direction, delta):
 	var player_rotation_modifier = player_base_movement_modifier
@@ -92,11 +97,19 @@ func calculate_speed(player_direction, delta):
 	velocity = (player_direction * (player_base_speed * player_speed_modifier) * transform.y) 
 	return velocity
 
-func start(pos, mtl: Control):
+func start(pos, mtl: ColorRect, left: float, right: float):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
 	milk_tea_level = mtl
+	left_boundary = left
+	right_boundary = right
+	update_vertical_boundaries()
+
+func update_vertical_boundaries():
+	var fill_amount = milk_tea_level.material.get_shader_parameter("fill_amount")
+	top_boundary = milk_tea_level.global_position.y + milk_tea_level.size.y * (1 - fill_amount)
+	bottom_boundary = milk_tea_level.global_position.y + milk_tea_level.size.y
 
 func grant_immunity():
 	player_immune = true
