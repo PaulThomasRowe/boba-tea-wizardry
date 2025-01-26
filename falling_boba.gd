@@ -13,9 +13,6 @@ func _ready():
 	linear_velocity = Vector2(0, fall_speed)
 
 func _process(delta):
-	# Remove the object when it's below the bottom of the screen
-	if position.y > get_viewport_rect().size.y + 50:
-		queue_free()
 	# Check if the boba has reached the left or right boundary
 	if position.x <= left_boundary:
 		position.x = left_boundary
