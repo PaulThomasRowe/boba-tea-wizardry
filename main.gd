@@ -37,8 +37,8 @@ func new_game():
 	score = 0
 	milk_tea_level = 1.0
 	
-	# Place the player in the start position
-	$Player.start($StartPosition.position, $HUD/MilkTeaLevel)
+	# Place the player in the start position and pass the boundaries
+	$Player.start($StartPosition.position, $HUD/MilkTeaLevel, milk_tea_left_boundary, milk_tea_right_boundary)
 	$Player.show()
 	$StartTimer.start()
 	
@@ -75,7 +75,7 @@ func spawn_boba():
 
 func update_milk_tea_boundaries():
 	var viewport_size = get_viewport().size
-	var cup_width = 200  # Adjust this to your cup's width
+	var cup_width = 300  # Adjust this to your cup's width
 	milk_tea_left_boundary = (viewport_size.x - cup_width) / 2
 	milk_tea_right_boundary = milk_tea_left_boundary + cup_width
 	
@@ -88,6 +88,11 @@ func update_boba_positions():
 			boba.position.x = milk_tea_left_boundary
 		elif boba.position.x > milk_tea_right_boundary:
 			boba.position.x = milk_tea_right_boundary
+
+func update_player_boundaries():
+	$Player.left_boundary = milk_tea_left_boundary
+	$Player.right_boundary = milk_tea_right_boundary
+	$Player.update_vertical_boundaries()
 
 func start_countdown():
 	$HUD.show_message("Get Ready")
@@ -151,6 +156,7 @@ func _on_ScoreTimer_timeout():
 	$HUD.update_milk_tea_level(milk_tea_level)
 	update_milk_tea_boundaries()
 	update_boba_positions()
+	update_player_boundaries()
 	if milk_tea_level <= 0:
 		game_over()
 

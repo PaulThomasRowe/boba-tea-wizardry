@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://tviqirlj785p"]
+[gd_scene load_steps=4 format=3 uid="uid://d2gnq5vk7r6iv"]
 
 [ext_resource type="Script" path="res://falling_boba.gd" id="1_0h0ex"]
 [ext_resource type="Texture2D" uid="uid://5lvm88ij4jqn" path="res://art/enemySwimming_1.png" id="1_n23gi"]
