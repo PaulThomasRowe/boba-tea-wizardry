@@ -1,17 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://c6lnn2fvrbaw2"]
+[gd_scene load_steps=10 format=3 uid="uid://c6lnn2fvrbaw2"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_0r6n5"]
-[ext_resource type="PackedScene" uid="uid://soyxpu1fwey6" path="res://mob.tscn" id="2_50pww"]
+[ext_resource type="PackedScene" uid="uid://rkdnhqgf2hpj" path="res://mob.tscn" id="2_50pww"]
 [ext_resource type="PackedScene" uid="uid://b4wpmqp05t6cu" path="res://player.tscn" id="3_veqnc"]
 [ext_resource type="PackedScene" uid="uid://bh8gl2v6ul1lv" path="res://hud.tscn" id="4_0qnje"]
-[ext_resource type="AudioStream" uid="uid://dccxbwhqa6tgf" path="res://sfx/BGM.wav" id="5_c7a4f"]
+[ext_resource type="AudioStream" uid="uid://bapacwowmbsto" path="res://sfx/BGM.wav" id="5_c7a4f"]
 [ext_resource type="AudioStream" uid="uid://dw26fpygeag8o" path="res://art/gameover.wav" id="6_hp1r0"]
+[ext_resource type="PackedScene" uid="uid://dxoggxi7jr42j" path="res://falling_boba.tscn" id="7_groxk"]
 
 [sub_resource type="Curve2D" id="1"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 720, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 0)
 }
 point_count = 5
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f16fa"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0r6n5")
@@ -43,6 +46,16 @@ stream = ExtResource("5_c7a4f")
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_hp1r0")
+
+[node name="floor" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
+position = Vector2(243, 723)
+scale = Vector2(3.06, 3.06)
+shape = SubResource("WorldBoundaryShape2D_f16fa")
+
+[node name="fallingBoba" parent="." instance=ExtResource("7_groxk")]
+position = Vector2(-172, -55)
 
 [connection signal="start_game" from="HUD" to="." method="new_game"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
