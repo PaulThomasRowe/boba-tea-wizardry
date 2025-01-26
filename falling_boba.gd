@@ -8,6 +8,17 @@ var left_boundary: float
 var right_boundary: float
 
 func _ready():
+	
+	var player_texture = get_node("Sprite2D")
+	
+	var ice = preload("res://art/ice.png")
+	var boba = preload("res://art/regular-boba.png")
+	var images = [ice, boba]
+	var name = images[randi() % images.size()]
+	$Sprite2D.texture = name
+	
+	#$Sprite2D.texture = 
+	#texture = load("res://art/ice.png")
 	# Set random fall speed
 	var fall_speed = randf_range(min_fall_speed, max_fall_speed)
 	linear_velocity = Vector2(0, fall_speed)
