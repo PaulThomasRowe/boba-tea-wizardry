@@ -4,6 +4,9 @@ signal start_game
 
 var tween: Tween
 
+const NORMAL_COLOR = Color(0, 0, 0)
+const WARNING_COLOR = Color(1, 0, 0)
+
 func show_message(text):
 	$MessageLabel.text = text
 	$MessageLabel.show()
@@ -15,6 +18,10 @@ func show_game_over():
 
 func update_score(score):
 	$ScoreLabel.text = str(score)
+	if score <= 10:
+		$ScoreLabel.add_theme_color_override("font_color", WARNING_COLOR)
+	else:
+		$ScoreLabel.add_theme_color_override("font_color", NORMAL_COLOR)
 	
 func update_milk_tea_level(percentage: float):
 	if tween:

@@ -2,8 +2,8 @@ extends Node
 
 @export var mob_scene: PackedScene
 @export var straw_scene: PackedScene
-@export var min_spawn_interval: float = 0.5  # Reduced from 3
-@export var max_spawn_interval: float = 2.0  # Reduced from 7.0
+@export var min_spawn_interval: float = 1.0  # Reduced from 3
+@export var max_spawn_interval: float = 4.0  # Reduced from 7.0
 @export var spawn_margin: float = 50.0
 var falling_boba_scene = preload("res://falling_boba.tscn")
 var score
@@ -16,6 +16,7 @@ var milk_tea_right_boundary: float
 
 
 func _ready():
+	$HUD.update_score(100)
 	$ScoreTimer.wait_time = 0.5  # Update every half second instead of every second
 	update_milk_tea_boundaries()
 	
@@ -35,7 +36,8 @@ func game_over():
 
 func new_game():
 	get_tree().call_group(&"mobs", &"queue_free")
-	score = 0
+	score = 100
+	$HUD.update_score(score)
 	milk_tea_level = 1.0
 	
 	# Place the player in the start position and pass the boundaries
@@ -152,7 +154,7 @@ func fade_music_in() -> void:
 	add_child(mob)"""
 
 func _on_ScoreTimer_timeout():
-	score += 1
+	score -= 1
 	$HUD.update_score(score)
 	milk_tea_level -= 0.01  # Decrease by 1% each time 
 	milk_tea_level = max(milk_tea_level, 0)  # Ensure it doesn't go below 0
@@ -160,7 +162,7 @@ func _on_ScoreTimer_timeout():
 	update_milk_tea_boundaries()
 	update_boba_positions()
 	update_player_boundaries()
-	if milk_tea_level <= 0:
+	if score <= 0 or milk_tea_level <= 0:
 		game_over()
 
 func _on_StartTimer_timeout():
