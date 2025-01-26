@@ -1,18 +1,24 @@
 extends Node
 
 @export var mob_scene: PackedScene
+@export var straw_scene: PackedScene
 @export var min_spawn_interval: float = 3
 @export var max_spawn_interval: float = 7.0
 @export var spawn_margin: float = 50.0
 var falling_boba_scene = preload("res://falling_boba.tscn")
 var score
 var milk_tea_level = 1.0  # 1.0 is full, 0.0 is empty
+var milk_tea_left_boundary: float
+var milk_tea_right_boundary: float
+
+
 
 
 
 func _ready():
 	$ScoreTimer.wait_time = 0.5  # Update every half second instead of every second
-
+	update_milk_tea_boundaries()
+	
 func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
@@ -20,9 +26,9 @@ func game_over():
 	$Music.stop()
 	#$DeathSound.play()
 	
-	# Hide player and clear all mobs
+	# Hide player and clear all bobas
 	$Player.hide()
-	get_tree().call_group("mobs", "queue_free")
+	get_tree().call_group("falling_boba", "queue_free")
 	
 	# Show the Start Button after the delay
 	$HUD/StartButton.show()
@@ -34,16 +40,22 @@ func new_game():
 	milk_tea_level = 1.0
 	
 	# Place the player in the start position
-	$Player.start($StartPosition.position)
+	$Player.start($StartPosition.position, $HUD/MilkTeaLevel)
 	$Player.show()
 	$StartTimer.start()
 	
 	$HUD.update_score(score)
 	$HUD.update_milk_tea_level(milk_tea_level)
+	
+	straw_scene = preload("res://straw.tscn")
+	var straw_instance = straw_scene.instantiate()
+	straw_instance.position = Vector2(225, -300)
+	add_child(straw_instance)
+	
 	$HUD.show_message("Get Ready")
 	
+	start_countdown()
 	fade_music_in()
-	
 	
 	# Spawn timer for the boba
 func spawn_boba():
@@ -54,12 +66,56 @@ func spawn_boba():
 	# Set random x position
 	new_boba.position.x = randf_range(spawn_margin, viewport_size.x - spawn_margin)
 	new_boba.position.y = -50  # Start above the screen
+
+# Spawn timer for the boba
+func spawn_boba():
+	var new_boba = falling_boba_scene.instantiate()
+	new_boba.add_to_group("falling_boba")
 	
+	# Set random x position within the milk tea boundaries
+	new_boba.position.x = randf_range(milk_tea_left_boundary, milk_tea_right_boundary)
+	new_boba.position.y = -50  # Start above the screen
+	
+	# Set the boundaries
+	new_boba.set_boundaries(milk_tea_left_boundary, milk_tea_right_boundary)
 	add_child(new_boba)
 	
 	# Set timer for next spawn
 	var next_spawn_time = randf_range(min_spawn_interval, max_spawn_interval)
 	get_tree().create_timer(next_spawn_time).timeout.connect(spawn_boba)
+
+func update_milk_tea_boundaries():
+	var viewport_size = get_viewport().size
+	var cup_width = 200  # Adjust this to your cup's width
+	milk_tea_left_boundary = (viewport_size.x - cup_width) / 2
+	milk_tea_right_boundary = milk_tea_left_boundary + cup_width
+	
+	# Update boundaries for all existing boba
+	get_tree().call_group("falling_boba", "set_boundaries", milk_tea_left_boundary, milk_tea_right_boundary)
+
+func update_boba_positions():
+	for boba in get_tree().get_nodes_in_group("falling_boba"):
+		if boba.position.x < milk_tea_left_boundary:
+			boba.position.x = milk_tea_left_boundary
+		elif boba.position.x > milk_tea_right_boundary:
+			boba.position.x = milk_tea_right_boundary
+
+func start_countdown():
+	$HUD.show_message("Get Ready")
+	await get_tree().create_timer(0.5).timeout
+	$HUD.show_message("3")
+	await get_tree().create_timer(0.5).timeout
+	$HUD.show_message("2")
+	await get_tree().create_timer(0.5).timeout
+	$HUD.show_message("1")
+	await get_tree().create_timer(0.5).timeout
+	$HUD.show_message("Go!")
+	await get_tree().create_timer(0.5).timeout
+	$HUD.hide_message()
+	
+	# Start the game timers
+	$StartTimer.start()
+	spawn_boba()
 
 func fade_music_in() -> void:
 	const fade_time = 2.0
@@ -73,6 +129,7 @@ func fade_music_in() -> void:
 	tween.tween_property($Music, "volume_db", default_music_db, fade_time)
 
 #Commented out Original mobs
+# Commented out Original mobs
 """func _on_MobTimer_timeout():
 	# Create a new instance of the Mob scene.
 	var mob = mob_scene.instantiate()
@@ -104,6 +161,8 @@ func _on_ScoreTimer_timeout():
 	milk_tea_level -= 0.01  # Decrease by 1% each time 
 	milk_tea_level = max(milk_tea_level, 0)  # Ensure it doesn't go below 0
 	$HUD.update_milk_tea_level(milk_tea_level)
+	update_milk_tea_boundaries()
+	update_boba_positions()
 	if milk_tea_level <= 0:
 		game_over()
 
@@ -114,3 +173,6 @@ func _on_StartTimer_timeout():
 func _process(delta):
 	if milk_tea_level <= 0:
 		game_over()
+
+func _on_music_finished() -> void:
+	$Music.play()
