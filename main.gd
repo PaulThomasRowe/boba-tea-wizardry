@@ -3,26 +3,43 @@ extends Node
 @export var mob_scene: PackedScene
 @export var straw_scene: PackedScene
 
+@export var min_spawn_interval: float = 3
+@export var max_spawn_interval: float = 7.0
+@export var spawn_margin: float = 50.0
+var falling_boba_scene = preload("res://falling_boba.tscn")
 var score
 var milk_tea_level = 1.0  # 1.0 is full, 0.0 is empty
+
+
 
 func _ready():
 	$ScoreTimer.wait_time = 0.5  # Update every half second instead of every second
 
 func game_over():
-	pass
-	#$ScoreTimer.stop()
-	#$MobTimer.stop()
-	#$HUD.show_game_over()
-	#$Music.stop()
+	$ScoreTimer.stop()
+	$MobTimer.stop()
+	$HUD.show_game_over()
+	$Music.stop()
 	#$DeathSound.play()
+	
+	# Hide player and clear all mobs
+	$Player.hide()
+	get_tree().call_group("mobs", "queue_free")
+	
+	# Show the Start Button after the delay
+	$HUD/StartButton.show()
 
 func new_game():
+	spawn_boba()
 	get_tree().call_group(&"mobs", &"queue_free")
 	score = 0
 	milk_tea_level = 1.0
-	$Player.start($StartPosition.position)
+	
+	# Place the player in the start position
+	$Player.start($StartPosition.position, $HUD/MilkTeaLevel)
+	$Player.show()
 	$StartTimer.start()
+	
 	$HUD.update_score(score)
 	$HUD.update_milk_tea_level(milk_tea_level)
 	
@@ -32,7 +49,25 @@ func new_game():
 	add_child(straw_instance)
 	
 	$HUD.show_message("Get Ready")
+	
 	fade_music_in()
+	
+	
+	# Spawn timer for the boba
+func spawn_boba():
+	
+	var new_boba = falling_boba_scene.instantiate()
+	var viewport_size = get_viewport().size
+	
+	# Set random x position
+	new_boba.position.x = randf_range(spawn_margin, viewport_size.x - spawn_margin)
+	new_boba.position.y = -50  # Start above the screen
+	
+	add_child(new_boba)
+	
+	# Set timer for next spawn
+	var next_spawn_time = randf_range(min_spawn_interval, max_spawn_interval)
+	get_tree().create_timer(next_spawn_time).timeout.connect(spawn_boba)
 
 func fade_music_in() -> void:
 	const fade_time = 2.0
@@ -40,11 +75,13 @@ func fade_music_in() -> void:
 
 	$Music.volume_db = -90.0 # Mute the player
 	$Music.play() # Start playing
+	
 	# Use tweens for transition:
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	tween.tween_property($Music, "volume_db", default_music_db, fade_time)
 
-func _on_MobTimer_timeout():
+#Commented out Original mobs
+"""func _on_MobTimer_timeout():
 	# Create a new instance of the Mob scene.
 	var mob = mob_scene.instantiate()
 
@@ -67,7 +104,7 @@ func _on_MobTimer_timeout():
 	mob.linear_velocity = velocity.rotated(direction)
 
 	# Spawn the mob by adding it to the Main scene.
-	add_child(mob)
+	add_child(mob)"""
 
 func _on_ScoreTimer_timeout():
 	score += 1
@@ -75,12 +112,17 @@ func _on_ScoreTimer_timeout():
 	milk_tea_level -= 0.01  # Decrease by 1% each time 
 	milk_tea_level = max(milk_tea_level, 0)  # Ensure it doesn't go below 0
 	$HUD.update_milk_tea_level(milk_tea_level)
+	if milk_tea_level <= 0:
+		game_over()
 
 func _on_StartTimer_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
 
 func _process(delta):
-	# TODO: implement game over in another PR
 	if milk_tea_level <= 0:
 		game_over()
+
+
+func _on_music_finished() -> void:
+	$Music.play()
