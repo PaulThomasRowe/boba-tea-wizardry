@@ -45,7 +45,7 @@ func new_game():
 	
 	straw_scene = preload("res://straw.tscn")
 	var straw_instance = straw_scene.instantiate()
-	straw_instance.position = Vector2(225, -300)
+	straw_instance.position = Vector2(225, -600)
 	add_child(straw_instance)
 	
 	$HUD.show_message("Get Ready")
