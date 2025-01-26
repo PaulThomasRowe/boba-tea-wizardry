@@ -89,3 +89,7 @@ func _on_StartTimer_timeout():
 func _process(delta):
 	if milk_tea_level <= 0:
 		game_over()
+
+
+func _on_music_finished() -> void:
+	$Music.play()
