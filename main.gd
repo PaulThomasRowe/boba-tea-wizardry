@@ -35,7 +35,24 @@ func new_game():
 	$HUD.update_milk_tea_level(milk_tea_level)
 	$HUD.show_message("Get Ready")
 	
+	start_countdown()
 	fade_music_in()
+
+func start_countdown():
+	$HUD.show_message("Get Ready")
+	await get_tree().create_timer(0.5).timeout
+	$HUD.show_message("3")
+	await get_tree().create_timer(0.5).timeout
+	$HUD.show_message("2")
+	await get_tree().create_timer(0.5).timeout
+	$HUD.show_message("1")
+	await get_tree().create_timer(0.5).timeout
+	$HUD.show_message("Go!")
+	await get_tree().create_timer(0.5).timeout
+	$HUD.hide_message()
+	
+	# Start the game timers
+	$StartTimer.start()
 
 func fade_music_in() -> void:
 	const fade_time = 2.0
@@ -89,7 +106,6 @@ func _on_StartTimer_timeout():
 func _process(delta):
 	if milk_tea_level <= 0:
 		game_over()
-
 
 func _on_music_finished() -> void:
 	$Music.play()
