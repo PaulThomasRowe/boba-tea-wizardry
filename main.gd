@@ -6,6 +6,7 @@ var milk_tea_level = 1.0  # 1.0 is full, 0.0 is empty
 
 func _ready():
 	$ScoreTimer.wait_time = 0.5  # Update every half second instead of every second
+	#$Straw.start($StartPosition.position)
 
 func game_over():
 	pass
@@ -24,6 +25,7 @@ func new_game():
 	$HUD.update_score(score)
 	$HUD.update_milk_tea_level(milk_tea_level)
 	$HUD.show_message("Get Ready")
+	$Straw.start($StartPosition.position)
 	fade_music_in()
 
 func fade_music_in() -> void:
