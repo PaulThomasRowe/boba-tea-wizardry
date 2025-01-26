@@ -1,12 +1,20 @@
 extends Node
 
 @export var mob_scene: PackedScene
+@export var my_scene: PackedScene
+
 var score
 var milk_tea_level = 1.0  # 1.0 is full, 0.0 is empty
 
 func _ready():
 	$ScoreTimer.wait_time = 0.5  # Update every half second instead of every second
 	#$Straw.start($StartPosition.position)
+	$Straw.show()
+
+	my_scene = preload("res://straw.tscn")
+	var scene_instance = my_scene.instantiate()
+	scene_instance.position = Vector2(200, 150)
+	add_child(scene_instance)
 
 func game_over():
 	pass
@@ -24,8 +32,18 @@ func new_game():
 	$StartTimer.start()
 	$HUD.update_score(score)
 	$HUD.update_milk_tea_level(milk_tea_level)
+	
+	my_scene = preload("res://straw.tscn")
+	var scene_instance = my_scene.instantiate()
+	scene_instance.position = Vector2(200, 150)
+	add_child(scene_instance)
+	
 	$HUD.show_message("Get Ready")
-	$Straw.start($StartPosition.position)
+	$Straw.show()
+	#$Straw.start($StartPosition.position)
+ 	#add_child(preload("res://straw.tscn").instantiate())
+	#var straw = mob_scene.instantiate()
+	#add_child(straw)
 	fade_music_in()
 
 func fade_music_in() -> void:
@@ -69,12 +87,16 @@ func _on_ScoreTimer_timeout():
 	milk_tea_level -= 0.01  # Decrease by 1% each time 
 	milk_tea_level = max(milk_tea_level, 0)  # Ensure it doesn't go below 0
 	$HUD.update_milk_tea_level(milk_tea_level)
+	#$HUD.update_straw()
+	#$Straw.show()
 
 func _on_StartTimer_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
+	#$Straw.show()
 
 func _process(delta):
 	# TODO: implement game over in another PR
 	if milk_tea_level <= 0:
 		game_over()
+	#$Straw.show()

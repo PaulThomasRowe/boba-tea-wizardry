@@ -26,6 +26,12 @@ func update_milk_tea_level(percentage: float):
 	tween = create_tween()
 	tween.tween_property($MilkTeaLevel, "anchor_top", 1 - percentage, 0.5)  # 0.5 seconds duration
 
+func update_straw():
+	if tween:
+		tween.kill()  # Stop any ongoing tween
+	tween = create_tween()
+	tween.tween_property($Straw, "anchor_top", 1, 0.5)  # 0.5 seconds duration
+
 func _on_StartButton_pressed():
 	$StartButton.hide()
 	start_game.emit()
