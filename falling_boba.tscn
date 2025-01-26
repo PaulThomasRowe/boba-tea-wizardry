@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2gnq5vk7r6iv"]
+[gd_scene load_steps=4 format=3 uid="uid://cmfy4hsvdw1f8"]
 
 [ext_resource type="Script" path="res://falling_boba.gd" id="1_0h0ex"]
 [ext_resource type="Texture2D" uid="uid://duow2p0ijwwvy" path="res://art/regular-boba.png" id="2_nlgxx"]
