@@ -1,7 +1,5 @@
 extends Area2D
 
-signal hit
-
 # player const movement variables
 const player_base_speed = 400
 const player_base_rotation_speed = 7
