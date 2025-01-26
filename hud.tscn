@@ -1,7 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccqoreueuxdb7"]
+[gd_scene load_steps=10 format=3 uid="uid://bh8gl2v6ul1lv"]
 
 [ext_resource type="Script" path="res://hud.gd" id="1"]
 [ext_resource type="FontFile" uid="uid://cit6gwe5px1q8" path="res://fonts/Xolonium-Regular.ttf" id="2_2jm3i"]
+[ext_resource type="Shader" path="res://cup.gdshader" id="2_g4e3l"]
+[ext_resource type="Texture2D" uid="uid://b1sv11v4l3k0n" path="res://art/boba_tea_cup_tall.png" id="3_hw2ho"]
+[ext_resource type="Shader" path="res://milktealevel.gdshader" id="4_2r7wb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8n0ou"]
+shader = ExtResource("2_g4e3l")
+shader_parameter/texture_image = ExtResource("3_hw2ho")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lmwd0"]
+shader = ExtResource("4_2r7wb")
+shader_parameter/fill_amount = 1.0
+shader_parameter/top_width = 1.0
+shader_parameter/bottom_width = 0.8
 
 [sub_resource type="InputEventAction" id="InputEventAction_fopy7"]
 action = &"start_game"
@@ -15,6 +28,7 @@ script = ExtResource("1")
 
 [node name="WhiteBackground" type="ColorRect" parent="."]
 z_index = -1
+material = SubResource("ShaderMaterial_8n0ou")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,12 +37,16 @@ grow_vertical = 2
 rotation = 0.00225727
 
 [node name="MilkTeaLevel" type="ColorRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
+material = SubResource("ShaderMaterial_lmwd0")
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.067
+anchor_right = 0.978
 anchor_bottom = 1.0
+offset_right = -13.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 0.800027, 0.61956, 1)
+color = Color(0.560784, 0.443137, 0.301961, 1)
 
 [node name="ScoreLabel" type="Label" parent="."]
 anchors_preset = 10
