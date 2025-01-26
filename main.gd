@@ -35,7 +35,7 @@ func new_game():
 	
 	my_scene = preload("res://straw.tscn")
 	var scene_instance = my_scene.instantiate()
-	scene_instance.position = Vector2(225, 150)
+	scene_instance.position = Vector2(225, -300)
 	add_child(scene_instance)
 	#scene_instance._start_swing()
 	
