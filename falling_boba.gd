@@ -2,8 +2,8 @@
 
 extends RigidBody2D
 
-@export var min_fall_speed: float = 100  # Increased from 0.001
-@export var max_fall_speed: float = 200  # Increased from 0.1
+@export var min_fall_speed: float = 0.001
+@export var max_fall_speed: float = 0.1
 var left_boundary: float
 var right_boundary: float
 
