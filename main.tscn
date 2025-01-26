@@ -55,7 +55,9 @@ scale = Vector2(3.06, 3.06)
 shape = SubResource("WorldBoundaryShape2D_f16fa")
 
 [node name="fallingBoba" parent="." instance=ExtResource("7_groxk")]
-position = Vector2(-172, -55)
+visible = false
+z_index = -1
+position = Vector2(-255, 564)
 
 [connection signal="start_game" from="HUD" to="." method="new_game"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
