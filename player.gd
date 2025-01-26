@@ -24,6 +24,7 @@ var player_slowdown_rotation_modifier = 0.4
 var milk_tea_level: Control
 
 func _ready():
+	$Trail.show_behind_parent
 	hide()
 
 func _process(delta):
@@ -60,13 +61,18 @@ func _process(delta):
 		position.y = clamp(position.y, mtl_rect.position.y, mtl_rect.end.y)
 	
 	if velocity.x != 0:
-		$AnimatedSprite2D.animation = &"right"
+		$AnimatedSprite2D.animation = &"default"
 		$AnimatedSprite2D.flip_v = false
 		$Trail.rotation = 0
-		$AnimatedSprite2D.flip_h = velocity.x < 0
+		$Trail.visible = true
+		#$AnimatedSprite2D.flip_h = velocity.x < 0
 	elif velocity.y != 0:
-		$AnimatedSprite2D.animation = &"up"
+		$AnimatedSprite2D.animation = &"default"
 		rotation = PI if velocity.y > 0 else 0
+		$Trail.visible = true
+	else:
+		$Trail.visible = false
+
 
 func calculate_rotation(rotation_direction, delta):
 	var player_rotation_modifier = player_base_movement_modifier
