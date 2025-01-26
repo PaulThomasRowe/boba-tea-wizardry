@@ -34,7 +34,7 @@ func new_game():
 	milk_tea_level = 1.0
 	
 	# Place the player in the start position
-	$Player.start($StartPosition.position)
+	$Player.start($StartPosition.position, $HUD/MilkTeaLevel)
 	$Player.show()
 	$StartTimer.start()
 	
@@ -114,3 +114,7 @@ func _on_StartTimer_timeout():
 func _process(delta):
 	if milk_tea_level <= 0:
 		game_over()
+
+
+func _on_music_finished() -> void:
+	$Music.play()

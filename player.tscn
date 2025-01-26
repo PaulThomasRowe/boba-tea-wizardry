@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b4wpmqp05t6cu"]
+[gd_scene load_steps=13 format=3 uid="uid://4vwrqjegqwpj"]
 
 [ext_resource type="Script" path="res://player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://ftkxr8r4qghp" path="res://art/playerGrey_walk1.png" id="2"]
@@ -73,3 +73,4 @@ texture = ExtResource("2")
 speed_scale = 2.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
