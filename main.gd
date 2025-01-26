@@ -9,12 +9,12 @@ var milk_tea_level = 1.0  # 1.0 is full, 0.0 is empty
 func _ready():
 	$ScoreTimer.wait_time = 0.5  # Update every half second instead of every second
 	#$Straw.start($StartPosition.position)
-	$Straw.show()
+	#$Straw.show()
 
-	my_scene = preload("res://straw.tscn")
-	var scene_instance = my_scene.instantiate()
-	scene_instance.position = Vector2(200, 150)
-	add_child(scene_instance)
+	#my_scene = preload("res://straw.tscn")
+	#var scene_instance = my_scene.instantiate()
+	#scene_instance.position = Vector2(200, 150)
+	#add_child(scene_instance)
 
 func game_over():
 	pass
@@ -35,11 +35,11 @@ func new_game():
 	
 	my_scene = preload("res://straw.tscn")
 	var scene_instance = my_scene.instantiate()
-	scene_instance.position = Vector2(200, 150)
+	scene_instance.position = Vector2(225, 150)
 	add_child(scene_instance)
 	
 	$HUD.show_message("Get Ready")
-	$Straw.show()
+	#$Straw.show()
 	#$Straw.start($StartPosition.position)
  	#add_child(preload("res://straw.tscn").instantiate())
 	#var straw = mob_scene.instantiate()
