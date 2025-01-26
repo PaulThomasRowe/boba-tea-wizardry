@@ -64,7 +64,6 @@ func _process(delta):
 
 	# Update position
 	position = new_position
-	position += velocity * delta
 	
 	if velocity.x != 0:
 		$AnimatedSprite2D.animation = &"default"
