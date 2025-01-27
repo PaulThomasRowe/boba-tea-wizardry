@@ -1,31 +1,34 @@
-# Dodge the Creeps
+# Bimble’s Boba Bonanza: Thirst for survival
 
-This is a simple game where your character must move
-and avoid the enemies for as long as possible.
+![Bimble’s Boba Bonanza- Thirst for survival](https://github.com/user-attachments/assets/5aa97838-8c2e-4f9d-8a4b-300822467130)
 
-This is a finished version of the game featured in the
-["Your first 2D game"](https://docs.godotengine.org/en/latest/getting_started/first_2d_game/index.html)
-tutorial in the documentation. For more details,
-consider following the tutorial in the documentation.
+## Introduction
+It's a fast-paced arcade-style game where players control Bimble, a wizard trapped as a boba pearl in a magical drink. The goal is to survive being slurped by the evil wizard Malgrin by dodging obstacles and the moving straw until the drink is finished.
 
-Language: GDScript
+## Story Line
 
-Renderer: Compatibility
+![Cut scene 1](https://github.com/user-attachments/assets/19ff5515-f77a-4dca-b8e0-fc45557683e3)
 
-Note: There is a C# version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/mono/dodge_the_creeps).
+![Cut scene 2](https://github.com/user-attachments/assets/4eec89fe-0b6c-4ae3-b9e4-da8b49186123)
 
-Check out this demo on the asset library: https://godotengine.org/asset-library/asset/2712
+![Cut scene 3](https://github.com/user-attachments/assets/50e3be52-9ed4-4a10-8ebe-5f72c1cf33e3)
 
-## Screenshots
+![Cut scene 4](https://github.com/user-attachments/assets/849ab3aa-79f6-4bd4-945b-89dcc584ee17)
 
-![GIF from the documentation](https://docs.godotengine.org/en/latest/_images/dodge_preview.gif)
+![Cut scene 5](https://github.com/user-attachments/assets/8a2c6036-9863-4e5e-acd9-d3b6c89a5bd1)
 
-![Screenshot](screenshots/dodge.png)
+![Cut scene 6](https://github.com/user-attachments/assets/1cd8aa21-6dba-4950-b403-80954ca2b564)
 
-## Copying
+![Cut scene 7](https://github.com/user-attachments/assets/b461ca84-f915-4324-aebe-8a830fe8950a)
 
-`art/House In a Forest Loop.ogg` Copyright &copy; 2012 [HorrorPen](https://opengameart.org/users/horrorpen), [CC-BY 3.0: Attribution](http://creativecommons.org/licenses/by/3.0/). Source: https://opengameart.org/content/loop-house-in-a-forest
+![Cut scene 8](https://github.com/user-attachments/assets/0cd8dc08-af24-4f56-822b-f27ad2bd4e06)
 
-Images are from "Abstract Platformer". Created in 2016 by kenney.nl, [CC0 1.0 Universal](http://creativecommons.org/publicdomain/zero/1.0/). Source: https://www.kenney.nl/assets/abstract-platformer
+![Cut scene 9](https://github.com/user-attachments/assets/7beeae0b-b41f-4d00-b073-3c09d7757919)
 
-Font is "Xolonium". Copyright &copy; 2011-2016 Severin Meyer <sev.ch@web.de>, with Reserved Font Name Xolonium, SIL open font license version 1.1. Details are in `fonts/LICENSE.txt`.
+![Cut scene 10](https://github.com/user-attachments/assets/8025d517-9e8f-4857-a3d7-d0966a386588)
+
+## Game Demo
+
+https://github.com/user-attachments/assets/3bf55eb7-8245-40f5-a610-b6d8fe4c02a1
+
+
