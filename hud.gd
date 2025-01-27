@@ -13,7 +13,7 @@ func show_message(text):
 	$MessageTimer.start()
 
 func show_game_over():
-	show_message("Game Over\nBimble’s Boba Bonanza")
+	show_message("Game Over")
 	await $MessageTimer.timeout
 
 func update_score(score):
