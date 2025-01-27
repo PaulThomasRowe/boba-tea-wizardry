@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://b5ig8lm3ddisj" path="res://sfx/BGM.wav" id="5_c7a4f"]
 [ext_resource type="AudioStream" uid="uid://dw26fpygeag8o" path="res://art/gameover.wav" id="6_hp1r0"]
 [ext_resource type="PackedScene" uid="uid://d2gnq5vk7r6iv" path="res://falling_boba.tscn" id="7_groxk"]
-[ext_resource type="PackedScene" uid="uid://c6602l0dv2b3a" path="res://ice_bomb.tscn" id="8_dwa6l"]
+[ext_resource type="PackedScene" uid="uid://gyknykolbdrw" path="res://ice_bomb.tscn" id="8_dwa6l"]
 
 [sub_resource type="Curve2D" id="1"]
 _data = {

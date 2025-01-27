@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6602l0dv2b3a"]
+[gd_scene load_steps=4 format=3 uid="uid://gyknykolbdrw"]
 
 [ext_resource type="Texture2D" uid="uid://bllmfrjac1ef" path="res://art/ice_bomb.png" id="1_3fvjk"]
 [ext_resource type="Script" path="res://ice_bomb.gd" id="1_u387d"]

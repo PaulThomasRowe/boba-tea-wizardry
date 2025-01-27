@@ -10,17 +10,12 @@ config_version=5
 
 [application]
 
-config/name="Dodge the Creeps"
-config/description="This is a simple game where your character must move
-and avoid the enemies for as long as possible.
-
-This is a finished version of the game featured in the 'Your first 2D game'
-tutorial in the documentation. For more details, consider
-following the tutorial in the documentation."
-config/tags=PackedStringArray("2d", "demo", "official")
+config/name="Bimble’s Boba Bonanza"
+config/description="It's a fast-paced arcade-style game where players control Bimble, a wizard trapped as a boba pearl in a magical drink. The goal is to survive being slurped by the evil wizard Malgrin by dodging obstacles and the moving straw until the drink is finished."
+config/tags=PackedStringArray("2d")
 run/main_scene="res://IntroCutscene/IntroScene1.tscn"
 config/features=PackedStringArray("4.3")
-config/icon="res://icon.webp"
+config/icon="res://art/boba_milk_tea.png"
 
 [display]
 
@@ -32,7 +27,7 @@ window/stretch/mode="canvas_items"
 
 [dotnet]
 
-project/assembly_name="Dodge the Creeps"
+project/assembly_name="Bimble’s Boba Bonanza"
 
 [input]
 
