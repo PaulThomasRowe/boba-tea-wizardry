@@ -31,4 +31,18 @@ It's a fast-paced arcade-style game where players control Bimble, a wizard trapp
 
 https://github.com/user-attachments/assets/3bf55eb7-8245-40f5-a610-b6d8fe4c02a1
 
+## Unimplemented Outro 
+
+![outro_1](https://github.com/user-attachments/assets/53785c06-ce5a-4e48-b875-0b0ddcebfa40)
+
+![Outro_2](https://github.com/user-attachments/assets/20d89f65-1483-4d0f-b38a-780653018dd6)
+
+![Outro_3](https://github.com/user-attachments/assets/1528ed66-0a10-41d4-9f9f-9d7a41b86c31)
+
+![Outro_4](https://github.com/user-attachments/assets/411c2a7c-4733-468f-ab5d-c7793bedbaaf)
+
+![Outro_5](https://github.com/user-attachments/assets/1ae5e7c8-d00e-4419-8fae-720f80e52ec4)
+
+![Outro_6](https://github.com/user-attachments/assets/bddd4770-2738-4406-ad0e-eea68132186a)
+
 
