@@ -136,7 +136,7 @@ func _on_body_entered(_body):
 		player_slow = true
 	if _body.is_in_group("straw"):
 		hide() # Player disappears after being hit.
-		hit.emit()
+		get_parent().game_over()
 		# Must be deferred as we can't change physics properties on a physics callback.
 		$CollisionShape2D.set_deferred(&"disabled", true)
 

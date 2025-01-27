@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends StaticBody2D
 
 var swing_amplitude = 20.0
 var swing_speed = 0.5

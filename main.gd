@@ -30,6 +30,7 @@ func game_over():
 	# Hide player and clear all bobas
 	$Player.hide()
 	get_tree().call_group("falling_boba", "queue_free")
+	get_tree().call_group("straw", "queue_free")
 	
 	# Show the Start Button after the delay
 	$HUD/StartButton.show()
