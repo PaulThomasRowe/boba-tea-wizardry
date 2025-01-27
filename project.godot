@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Dodge the Creeps"
+config/name="Boba Wizard"
 config/description="This is a simple game where your character must move
 and avoid the enemies for as long as possible.
 
@@ -20,7 +20,7 @@ following the tutorial in the documentation."
 config/tags=PackedStringArray("2d", "demo", "official")
 run/main_scene="res://IntroCutscene/IntroScene1.tscn"
 config/features=PackedStringArray("4.3")
-config/icon="res://icon.webp"
+config/icon="res://art/boba_milk_tea.png"
 
 [display]
 
@@ -32,7 +32,7 @@ window/stretch/mode="canvas_items"
 
 [dotnet]
 
-project/assembly_name="Dodge the Creeps"
+project/assembly_name="Boba Wizard"
 
 [input]
 
