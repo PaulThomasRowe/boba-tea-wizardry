@@ -71,8 +71,9 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_2jm3i")
 theme_override_font_sizes/font_size = 60
-text = "Boba
-Wizard"
+text = "Bimble’s
+Boba
+Bonanza"
 horizontal_alignment = 1
 
 [node name="StartButton" type="Button" parent="."]
