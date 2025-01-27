@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://c6lnn2fvrbaw2"]
+[gd_scene load_steps=19 format=3 uid="uid://c6lnn2fvrbaw2"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_0r6n5"]
-[ext_resource type="PackedScene" uid="uid://c7khi36lobpce" path="res://mob.tscn" id="2_50pww"]
 [ext_resource type="PackedScene" uid="uid://b4wpmqp05t6cu" path="res://player.tscn" id="3_veqnc"]
 [ext_resource type="PackedScene" uid="uid://ccqoreueuxdb7" path="res://hud.tscn" id="4_0qnje"]
 [ext_resource type="AudioStream" uid="uid://b5ig8lm3ddisj" path="res://sfx/BGM.wav" id="5_c7a4f"]
@@ -9,7 +8,78 @@
 [ext_resource type="PackedScene" uid="uid://d2gnq5vk7r6iv" path="res://falling_boba.tscn" id="7_groxk"]
 [ext_resource type="PackedScene" uid="uid://gyknykolbdrw" path="res://ice_bomb.tscn" id="8_dwa6l"]
 
-[sub_resource type="Curve2D" id="1"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_06hiq"]
+load_path = "res://.godot/imported/enemyFlyingAlt_1.png-559f599b16c69b112c1b53f6332e9489.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_watex"]
+load_path = "res://.godot/imported/enemyFlyingAlt_2.png-31dc7310eda6e1b721224f3cd932c076.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eou14"]
+load_path = "res://.godot/imported/enemySwimming_1.png-dd0e11759dc3d624c8a704f6e98a3d80.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_q6a0o"]
+load_path = "res://.godot/imported/enemySwimming_2.png-4c0cbc0732264c4ea3290340bd4a0a62.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ew6lk"]
+load_path = "res://.godot/imported/enemyWalking_1.png-5af6eedbe61b701677d490ffdc1e6471.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_civ28"]
+load_path = "res://.godot/imported/enemyWalking_2.png-67c480ed60c35e95f5acb0436246b935.ctex"
+
+[sub_resource type="SpriteFrames" id="1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_06hiq")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_watex")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_eou14")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_q6a0o")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_ew6lk")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_civ28")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 4.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="2"]
+radius = 37.0
+height = 100.0
+
+[sub_resource type="PackedScene" id="PackedScene_acyv5"]
+_bundled = {
+"conn_count": 1,
+"conns": PackedInt32Array(3, 0, 14, 13, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("Mob", "collision_mask", "gravity_scale", "mobs", "RigidBody2D", "AnimatedSprite2D", "scale", "sprite_frames", "animation", "CollisionShape2D", "rotation", "shape", "VisibleOnScreenNotifier2D", "_on_VisibilityNotifier2D_screen_exited", "screen_exited"),
+"node_count": 4,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 4, 0, -1, 2, 1, 0, 2, 1, 1, 3, 0, 0, 5, 5, -1, 3, 6, 2, 7, 3, 8, 4, 0, 0, 0, 9, 9, -1, 2, 10, 5, 11, 6, 0, 0, 0, 12, 12, -1, 0, 0),
+"variants": [0, 0.0, Vector2(0.75, 0.75), SubResource("1"), &"walk", 1.5708, SubResource("2")],
+"version": 3
+}
+
+[sub_resource type="Curve2D" id="Curve2D_edyne"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 720, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 0)
 }
@@ -19,7 +89,7 @@ point_count = 5
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0r6n5")
-mob_scene = ExtResource("2_50pww")
+mob_scene = SubResource("PackedScene_acyv5")
 
 [node name="HUD" parent="." instance=ExtResource("4_0qnje")]
 
@@ -38,7 +108,7 @@ one_shot = true
 position = Vector2(240, 450)
 
 [node name="MobPath" type="Path2D" parent="."]
-curve = SubResource("1")
+curve = SubResource("Curve2D_edyne")
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
 
