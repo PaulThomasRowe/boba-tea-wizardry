@@ -1,13 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://66mp5ewyefok"]
+[gd_scene load_steps=5 format=3 uid="uid://dlalpulpupybb"]
 
 [ext_resource type="Script" path="res://straw.gd" id="1_an6mm"]
-[ext_resource type="Texture2D" uid="uid://bgqvi07tsly4f" path="res://art/boba_straw_12oz.webp" id="2_k8h7b"]
+[ext_resource type="Texture2D" uid="uid://bjgbfm2plykb4" path="res://art/boba-straw.png" id="2_4w2yw"]
 
 [sub_resource type="SpriteFrames" id="1"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_k8h7b")
+"texture": ExtResource("2_4w2yw")
 }],
 "loop": true,
 "name": &"fly",
@@ -15,12 +15,10 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="2"]
-radius = 37.0
-height = 100.0
+radius = 23.0
+height = 66.0
 
-[node name="Straw" type="RigidBody2D" groups=["mobs"]]
-collision_mask = 0
-gravity_scale = 0.0
+[node name="straw" type="StaticBody2D"]
 script = ExtResource("1_an6mm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -29,9 +27,10 @@ sprite_frames = SubResource("1")
 animation = &"fly"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-rotation = 1.5708
+z_index = 12
+position = Vector2(0, 571)
+scale = Vector2(0.531633, 1)
 shape = SubResource("2")
+debug_color = Color(0.132586, 0.638005, 0.307606, 0.42)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

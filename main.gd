@@ -35,6 +35,7 @@ func game_over():
 	# Hide player and clear all bobas
 	$Player.hide()
 	get_tree().call_group("falling_boba", "queue_free")
+	get_tree().call_group("straw", "queue_free")
 	get_tree().call_group("falling_ice_bomb", "queue_free")
 	
 	# Show the Start Button after the delay
@@ -56,8 +57,9 @@ func new_game():
 	
 	straw_scene = preload("res://straw.tscn")
 	var straw_instance = straw_scene.instantiate()
-	straw_instance.position = Vector2(225, -300)
+	straw_instance.position = Vector2(225, -550)
 	add_child(straw_instance)
+	straw_instance.add_to_group("straw")
 	
 	$HUD.show_message("Get Ready")
 	
