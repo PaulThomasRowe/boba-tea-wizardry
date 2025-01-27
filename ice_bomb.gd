@@ -6,24 +6,19 @@ extends RigidBody2D
 @export var max_fall_speed: float = 0.1
 var left_boundary: float
 var right_boundary: float
+var explosion_timer: Timer
+
+signal exploded(position)
 
 func _ready():
-	
-	var player_texture = get_node("Sprite2D")
-	
-	var aloe_vera = preload("res://art/aloe_vera.png")
-	var coffee_bean = preload("res://art/coffee_bean.png")
-	var boba = preload("res://art/regular-boba.png")
-	var images = [boba, boba, boba, boba, aloe_vera, boba, coffee_bean, boba]
-	var name = images[randi() % images.size()]
-	#name = image[0]
-	$Sprite2D.texture = name
-	
-	#$Sprite2D.texture = 
-	#texture = load("res://art/ice.png")
 	# Set random fall speed
 	var fall_speed = randf_range(min_fall_speed, max_fall_speed)
 	linear_velocity = Vector2(0, fall_speed)
+	
+	explosion_timer = Timer.new()
+	explosion_timer.connect("timeout", Callable(self, "_on_explosion_timer_timeout"))
+	add_child(explosion_timer)
+	explosion_timer.start(2.0)
 
 func _process(delta):
 	# Check if the boba has reached the left or right boundary
@@ -46,3 +41,19 @@ func _integrate_forces(state):
 func set_boundaries(left: float, right: float):
 	left_boundary = left
 	right_boundary = right
+
+func _on_explosion_timer_timeout():
+	var flash_duration = 0.1
+	var flash_count = 5
+	
+	for i in range(flash_count):
+		modulate = Color(1, 0, 0)  # Change to red color
+		await get_tree().create_timer(flash_duration).timeout
+		modulate = Color(1, 1, 1)  # Change back to white (normal color)
+		await get_tree().create_timer(flash_duration).timeout
+	
+	explode()
+
+func explode():
+	emit_signal("exploded", global_position)
+	queue_free()

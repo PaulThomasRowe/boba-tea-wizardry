@@ -145,3 +145,43 @@ func _on_body_exited(_body):
 	if _body.is_in_group("falling_boba"):
 		player_slow = false
 		print("Player speed restored because of exiting collision!")
+
+func push_from_explosion(explosion_position):
+	var direction = global_position - explosion_position
+	var distance = direction.length()
+	var throw_distance = 100  # Distance threshold for throwing the player
+	var throw_strength = 500  # Strength of the throw
+	var push_strength = 3000  # Normal push strength
+	
+	if distance < throw_distance:
+		# Player is close enough to be thrown
+		var throw_vector = direction.normalized() * throw_strength
+		var throw_duration = 0.5  # Duration of the throw in seconds
+		
+		# Calculate the target position
+		var target_position = position + throw_vector
+		
+		# Clamp the target position within boundaries
+		target_position.x = clamp(target_position.x, left_boundary, right_boundary)
+		# Assuming you have top and bottom boundaries as well
+		target_position.y = clamp(target_position.y, top_boundary, bottom_boundary)
+		
+		# Use a Tween to animate the throw
+		var tween = create_tween()
+		tween.set_ease(Tween.EASE_OUT)
+		tween.set_trans(Tween.TRANS_QUAD)
+		tween.tween_property(self, "position", target_position, throw_duration)
+		
+		# Optional: Add a slight rotation for effect
+		tween.parallel().tween_property(self, "rotation", randf_range(-PI/4, PI/4), throw_duration)
+		
+		# Reset rotation after throw
+		tween.tween_property(self, "rotation", 0, 0.2)
+	else:
+		# Normal push if not close enough
+		var push_vector = direction.normalized() * (push_strength / (distance + 1))
+		position += push_vector
+		
+		# Clamp position immediately for normal push
+		position.x = clamp(position.x, left_boundary, right_boundary)
+		position.y = clamp(position.y, top_boundary, bottom_boundary)
