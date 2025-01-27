@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2gnq5vk7r6iv"]
+
+[ext_resource type="Script" path="res://falling_boba.gd" id="1_0h0ex"]
+[ext_resource type="Texture2D" uid="uid://duow2p0ijwwvy" path="res://art/regular-boba.png" id="2_nlgxx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ew5ns"]
+radius = 26.0768
+
+[node name="fallingBoba" type="RigidBody2D"]
+gravity_scale = 0.1
+script = ExtResource("1_0h0ex")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.5, 0)
+scale = Vector2(1.02273, 1)
+texture = ExtResource("2_nlgxx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(19, 0)
+shape = SubResource("CircleShape2D_ew5ns")
+
+[node name="SpawnTimer" type="Timer" parent="."]

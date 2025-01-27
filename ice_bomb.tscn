@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://gyknykolbdrw"]
+
+[ext_resource type="Texture2D" uid="uid://bllmfrjac1ef" path="res://art/ice_bomb.png" id="1_3fvjk"]
+[ext_resource type="Script" path="res://ice_bomb.gd" id="1_u387d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ey78y"]
+size = Vector2(50, 50)
+
+[node name="IceBomb" type="RigidBody2D"]
+script = ExtResource("1_u387d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3fvjk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ey78y")
+
+[node name="SpawnTimer" type="Timer" parent="."]
