@@ -1,12 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://c6lnn2fvrbaw2"]
+[gd_scene load_steps=12 format=3 uid="uid://c6lnn2fvrbaw2"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_0r6n5"]
 [ext_resource type="PackedScene" uid="uid://b4wpmqp05t6cu" path="res://player.tscn" id="3_veqnc"]
 [ext_resource type="PackedScene" uid="uid://ccqoreueuxdb7" path="res://hud.tscn" id="4_0qnje"]
 [ext_resource type="AudioStream" uid="uid://b5ig8lm3ddisj" path="res://sfx/BGM.wav" id="5_c7a4f"]
 [ext_resource type="AudioStream" uid="uid://dw26fpygeag8o" path="res://art/gameover.wav" id="6_hp1r0"]
-[ext_resource type="PackedScene" uid="uid://d2gnq5vk7r6iv" path="res://falling_boba.tscn" id="7_groxk"]
-[ext_resource type="PackedScene" uid="uid://gyknykolbdrw" path="res://ice_bomb.tscn" id="8_dwa6l"]
+[ext_resource type="PackedScene" uid="uid://b8l6bver4vk0" path="res://falling_boba.tscn" id="7_groxk"]
+[ext_resource type="PackedScene" path="res://ice_bomb.tscn" id="8_dwa6l"]
+[ext_resource type="PackedScene" uid="uid://c4ubeglymqyfk" path="res://OutroCutscene/OutroScene1.tscn" id="9_47eks"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_06hiq"]
 load_path = "res://.godot/imported/enemyFlyingAlt_1.png-559f599b16c69b112c1b53f6332e9489.ctex"
@@ -132,6 +133,8 @@ position = Vector2(-255, 564)
 
 [node name="IceBomb" parent="." instance=ExtResource("8_dwa6l")]
 visible = false
+
+[node name="OutroScene1" parent="." instance=ExtResource("9_47eks")]
 
 [connection signal="start_game" from="HUD" to="." method="new_game"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]

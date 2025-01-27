@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 signal start_game
+signal end_game
 
 var tween: Tween
 
@@ -44,6 +45,10 @@ func update_straw():
 func _on_StartButton_pressed():
 	$StartButton.hide()
 	start_game.emit()
+
+func _on_EndButton_pressed():
+	$EndButton.hide()
+	end_game.emit()
 
 func _on_MessageTimer_timeout():
 	$MessageLabel.hide()

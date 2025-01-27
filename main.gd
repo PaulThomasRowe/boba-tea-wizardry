@@ -40,6 +40,7 @@ func game_over():
 	
 	# Show the Start Button after the delay
 	$HUD/StartButton.show()
+	$HUD/EndButton.show()
 
 func new_game():
 	game_started = false
@@ -156,6 +157,15 @@ func start_game():
 	$StartTimer.start()
 	spawn_boba()
 	spawn_ice_bomb()
+
+func load_outro_scene():
+	# Use SceneTree.change_scene() to switch scenes
+	#get_tree().change_scene_to_file("res://OutroCutscene/OutroScene1.tscn")
+	return
+
+func end_game():
+	#load_outro_scene()
+	return
 
 func fade_music_in() -> void:
 	const fade_time = 2.0

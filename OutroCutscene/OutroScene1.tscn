@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://c4ubeglymqyfk"]
+
+[ext_resource type="Script" path="res://OutroCutscene/OutroSceneAdvancement.gd" id="1_jdsxe"]
+[ext_resource type="Script" path="res://IntroCutscene/Start_Bounce.gd" id="4_32fn6"]
+[ext_resource type="Texture2D" uid="uid://cnrvw1fomnje2" path="res://OutroCutscene/Outro scene 1.png" id="6_6sioo"]
+[ext_resource type="Texture2D" uid="uid://rhp4t734ygi3" path="res://OutroCutscene/Outro scene 2.png" id="7_ilqlc"]
+[ext_resource type="Texture2D" uid="uid://diqdaw0u2ycye" path="res://OutroCutscene/Outro scene 3.png" id="8_16bsm"]
+[ext_resource type="Texture2D" uid="uid://cu6xsqehya842" path="res://OutroCutscene/Outro scene 4.png" id="9_qxo1u"]
+[ext_resource type="Texture2D" uid="uid://db3g26boeha1o" path="res://OutroCutscene/Outro scene 5.png" id="10_v3olm"]
+
+[node name="OutroScene1" type="Node2D"]
+script = ExtResource("1_jdsxe")
+
+[node name="MainMenu" type="Sprite2D" parent="."]
+position = Vector2(242.5, 363.875)
+scale = Vector2(0.337, 0.434)
+
+[node name="Start" type="Sprite2D" parent="MainMenu"]
+position = Vector2(-27.0771, 440.092)
+scale = Vector2(1.01555, 0.889257)
+script = ExtResource("4_32fn6")
+
+[node name="TitleBounce" type="Sprite2D" parent="MainMenu"]
+position = Vector2(-19.2879, 281.394)
+scale = Vector2(0.65275, 0.717395)
+
+[node name="End" type="Sprite2D" parent="MainMenu"]
+position = Vector2(-27.0771, 440.092)
+scale = Vector2(1.01555, 0.889257)
+script = ExtResource("4_32fn6")
+
+[node name="CutScene1" type="Sprite2D" parent="."]
+position = Vector2(242.5, 363.875)
+scale = Vector2(0.337, 0.434)
+texture = ExtResource("6_6sioo")
+
+[node name="CutScene2" type="Sprite2D" parent="."]
+position = Vector2(242.5, 363.875)
+scale = Vector2(0.337, 0.434)
+texture = ExtResource("7_ilqlc")
+
+[node name="CutScene3" type="Sprite2D" parent="."]
+position = Vector2(242.5, 363.875)
+scale = Vector2(0.337, 0.434)
+texture = ExtResource("8_16bsm")
+
+[node name="CutScene4" type="Sprite2D" parent="."]
+position = Vector2(242.5, 363.875)
+scale = Vector2(0.337, 0.434)
+texture = ExtResource("9_qxo1u")
+
+[node name="CutScene5" type="Sprite2D" parent="."]
+position = Vector2(242.5, 363.875)
+scale = Vector2(0.337, 0.434)
+texture = ExtResource("10_v3olm")

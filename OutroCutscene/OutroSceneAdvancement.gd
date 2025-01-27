@@ -35,10 +35,9 @@ func advance_cutscene():
 	else:
 		# End of the cutscene, optionally do something
 		print("Cutscene finished!")
-		load_main_scene()
+		#load_main_scene()
 
 func load_main_scene():
 	# Use SceneTree.change_scene() to switch scenes
-	get_tree().change_scene_to_file("res://main.tscn") 
-	#get_tree().
-	
+	#get_tree().change_scene_to_file("res://IntroCutscene/IntroScene1.tscn")
+	return
