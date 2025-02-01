@@ -1,4 +1,7 @@
-# Bimble’s Boba Bonanza: Thirst for survival
+# Bimble’s Boba Bonanza: Thirst for Survival
+This project was finished by 2 UI/UX designers and 4 software engineers within 48 hrs (it was their first time building a game 🎮) at the 2025 San Diego Global Game Jam at Mesa College!
+
+Check more here: https://globalgamejam.org/games/2025/bibles-boba-bananza-7
 
 ![Bimble’s Boba Bonanza- Thirst for survival](https://github.com/user-attachments/assets/5aa97838-8c2e-4f9d-8a4b-300822467130)
 
